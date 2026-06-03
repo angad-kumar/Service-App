@@ -3,40 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <meta name="description" content="Citriot Service & Traceability Platform - Vehicle tracking and predictive monitoring service management">
+    <meta name="description" content="Citriot Service & Traceability Platform - Vehicle tracking and predictive monitoring service management for cold chain trucks and industrial motors">
     <meta name="theme-color" content="#0a1f3b">
-    <title>Citriot Service & Traceability Platform</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Citriot | Service & Traceability Platform</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ============ CSS Variables ============ */
         :root {
-            --primary-dark: #0a1f3b;
+            --primary: #0a1f3b;
             --primary-light: #1a3a5c;
+            --primary-dark: #06152b;
+            --accent: #2196F3;
+            --success: #2e7d32;
+            --success-light: #e8f5e9;
+            --warning: #f57c00;
+            --warning-light: #fff3e0;
+            --danger: #c62828;
+            --danger-light: #ffebee;
+            --info: #1565c0;
+            --info-light: #e3f2fd;
             --white: #ffffff;
-            --bg-light: #f5f7fb;
-            --bg-card: #f8fafd;
-            --border-color: #e2e8f0;
-            --text-dark: #1e293b;
-            --text-muted: #64748b;
-            --success-green: #2e7d32;
-            --success-bg: #e8f5e9;
-            --warning-orange: #b45309;
-            --warning-bg: #fff3e0;
-            --danger-red: #b91c1c;
-            --danger-bg: #fee2e2;
-            --info-blue: #1e40af;
-            --info-bg: #e0e7ff;
-            --shadow-sm: 0 2px 8px rgba(0,0,0,0.02);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
-            --shadow-lg: 0 20px 35px rgba(0, 20, 40, 0.12);
-            --radius-sm: 12px;
-            --radius-md: 18px;
-            --radius-lg: 24px;
-            --radius-xl: 32px;
-            --transition: all 0.2s ease;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+            --shadow-xs: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.1), 0 10px 10px rgba(0,0,0,0.04);
+            --radius-xs: 6px;
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --radius-2xl: 36px;
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
-        /* ============ Global Styles ============ */
         * {
             margin: 0;
             padding: 0;
@@ -44,102 +56,169 @@
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
-            background: var(--bg-light);
+            font-family: var(--font-sans);
+            background: linear-gradient(135deg, #e8edf5 0%, #f0f4f8 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 12px;
+            padding: 16px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* ============ App Container ============ */
+        /* Background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(10, 31, 59, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(33, 150, 243, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(46, 125, 50, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
         .app-container {
             max-width: 480px;
             width: 100%;
             background: var(--white);
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-lg);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-xl);
             overflow: hidden;
             position: relative;
-            height: 90vh;
-            max-height: 900px;
+            height: 92vh;
+            max-height: 950px;
             display: flex;
             flex-direction: column;
-            border: 1px solid rgba(0, 32, 64, 0.08);
+            z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
         }
 
         @media (min-width: 768px) {
             .app-container {
-                max-width: 450px;
-                height: 92vh;
+                max-width: 460px;
+                height: 94vh;
             }
         }
 
-        @media (min-width: 1024px) {
+        @media (min-width: 1200px) {
             .app-container {
                 max-width: 480px;
             }
         }
 
-        /* ============ Header ============ */
+        /* Header */
         .header {
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
             color: var(--white);
-            padding: 16px 20px;
+            padding: 20px 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom-left-radius: var(--radius-lg);
-            border-bottom-right-radius: var(--radius-lg);
             flex-shrink: 0;
-            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
         }
 
         .header-brand {
             display: flex;
             flex-direction: column;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 2px;
+        }
+
+        .header-logo i {
+            font-size: 1.8rem;
+            color: #4fc3f7;
         }
 
         .header h1 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
             margin: 0;
+            background: linear-gradient(to right, #ffffff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .header-subtitle {
             font-size: 0.7rem;
-            opacity: 0.85;
+            opacity: 0.8;
             font-weight: 400;
+            letter-spacing: 0.5px;
         }
 
         .tech-badge {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            padding: 6px 14px;
-            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            padding: 8px 16px;
+            border-radius: 40px;
             font-size: 0.75rem;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .tech-badge:hover {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
         }
 
-        /* ============ Main Content ============ */
+        .tech-badge .online-dot {
+            width: 8px;
+            height: 8px;
+            background: #4caf50;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+
+        /* Main Content */
         .main-content {
             flex: 1;
             overflow-y: auto;
-            padding: 16px;
+            padding: 20px 16px;
             scrollbar-width: thin;
-            scrollbar-color: var(--border-color) transparent;
-            background: var(--white);
+            scrollbar-color: var(--gray-300) transparent;
+            background: linear-gradient(180deg, #ffffff 0%, #fafbfd 100%);
             -webkit-overflow-scrolling: touch;
         }
 
@@ -147,34 +226,62 @@
             width: 4px;
         }
 
+        .main-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
         .main-content::-webkit-scrollbar-thumb {
-            background: var(--border-color);
+            background: var(--gray-300);
             border-radius: 4px;
         }
 
-        /* ============ Cards ============ */
+        /* Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--info-light), #f0f7ff);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            margin-bottom: 20px;
+            border: 1px solid #bbdefb;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .welcome-banner i {
+            font-size: 2rem;
+            color: var(--info);
+        }
+
+        .welcome-text h3 {
+            font-size: 0.9rem;
+            color: var(--gray-800);
+            margin-bottom: 2px;
+        }
+
+        .welcome-text p {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+        }
+
+        /* Action Cards */
         .card-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin: 16px 0 12px;
+            gap: 14px;
+            margin-bottom: 20px;
         }
 
         .action-card {
-            background: linear-gradient(135deg, #f0f4fc, #e8edf8);
+            background: var(--white);
             border-radius: var(--radius-lg);
-            padding: 20px 16px;
+            padding: 22px 18px;
             text-align: center;
-            font-weight: 600;
-            color: var(--primary-dark);
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-            border: 2px solid transparent;
             cursor: pointer;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
+            transition: var(--transition);
+            border: 2px solid var(--gray-200);
             position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-xs);
         }
 
         .action-card::before {
@@ -183,365 +290,494 @@
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            border-radius: var(--radius-lg);
+            height: 4px;
+            transition: var(--transition);
+        }
+
+        .action-card.service-card::before {
+            background: linear-gradient(to right, var(--warning), #ff9800);
+        }
+
+        .action-card.install-card::before {
+            background: linear-gradient(to right, var(--success), #4caf50);
+        }
+
+        .action-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
         }
 
         .action-card:active {
             transform: scale(0.97);
-            border-color: var(--primary-dark);
         }
 
-        .action-card i {
-            font-size: 2rem;
-            margin-bottom: 8px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .action-card div, .action-card small {
-            position: relative;
-            z-index: 1;
-        }
-
-        .action-card.service-card {
-            border-left: 4px solid var(--warning-orange);
-        }
-
-        .action-card.install-card {
-            border-left: 4px solid var(--success-green);
-        }
-
-        /* ============ Stats Pills ============ */
-        .stats-row {
+        .action-card .card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
             display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 10px 0 16px;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 1.6rem;
         }
 
-        .stat-pill {
-            background: var(--bg-card);
-            border-radius: 30px;
-            padding: 8px 14px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            display: inline-flex;
+        .service-card .card-icon {
+            background: var(--warning-light);
+            color: var(--warning);
+        }
+
+        .install-card .card-icon {
+            background: var(--success-light);
+            color: var(--success);
+        }
+
+        .action-card h3 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 4px;
+        }
+
+        .action-card p {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            font-weight: 400;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--gray-700);
+            margin-bottom: 12px;
+            display: flex;
             align-items: center;
-            gap: 6px;
-            border: 1px solid var(--border-color);
+            gap: 8px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 14px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-xs);
             transition: var(--transition);
         }
 
-        .status-badge {
-            border-radius: 20px;
-            padding: 2px 10px;
+        .stat-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-card .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .stat-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .stat-card .stat-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--gray-800);
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.7rem;
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+
+        .bg-blue-light { background: var(--info-light); color: var(--info); }
+        .bg-orange-light { background: var(--warning-light); color: var(--warning); }
+        .bg-green-light { background: var(--success-light); color: var(--success); }
+        .bg-red-light { background: var(--danger-light); color: var(--danger); }
+
+        /* Recent Activity */
+        .activity-list {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+        }
+
+        .activity-item {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--gray-100);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-item:hover {
+            background: var(--gray-50);
+        }
+
+        .activity-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .dot-success { background: var(--success); }
+        .dot-warning { background: var(--warning); }
+        .dot-info { background: var(--info); }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-content h4 {
+            font-size: 0.85rem;
             font-weight: 600;
-            font-size: 0.75rem;
+            color: var(--gray-800);
+            margin-bottom: 2px;
         }
 
-        .status-success {
-            color: var(--success-green);
-            background: var(--success-bg);
+        .activity-content p {
+            font-size: 0.7rem;
+            color: var(--gray-500);
         }
 
-        .status-warning {
-            color: var(--warning-orange);
-            background: var(--warning-bg);
+        .activity-time {
+            font-size: 0.65rem;
+            color: var(--gray-400);
+            white-space: nowrap;
         }
 
-        .status-danger {
-            color: var(--danger-red);
-            background: var(--danger-bg);
-        }
-
-        /* ============ Selection Cards ============ */
+        /* Selection Cards */
         .selection-card {
             background: var(--white);
-            border: 2px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 16px;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            padding: 18px;
             margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 14px;
-            box-shadow: var(--shadow-sm);
             cursor: pointer;
             transition: var(--transition);
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
+            box-shadow: var(--shadow-xs);
+        }
+
+        .selection-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+            transform: translateX(4px);
         }
 
         .selection-card:active {
-            background: #f0f4fc;
-            border-color: var(--primary-dark);
             transform: scale(0.98);
         }
 
         .selection-card.selected {
-            background: var(--info-bg);
-            border-color: var(--primary-dark);
+            background: var(--info-light);
+            border-color: var(--primary);
             border-width: 2px;
         }
 
-        .selection-card i:first-child {
-            font-size: 1.8rem;
-            color: var(--primary-dark);
-            width: 40px;
-            text-align: center;
-        }
-
-        .selection-card .card-content {
-            flex: 1;
-        }
-
-        .selection-card .card-content strong {
-            display: block;
-            margin-bottom: 2px;
-        }
-
-        .selection-card .card-content small {
-            color: var(--text-muted);
-            font-size: 0.8rem;
-        }
-
-        /* ============ Buttons ============ */
-        .btn {
-            background: var(--primary-dark);
-            color: var(--white);
-            border: none;
-            border-radius: 40px;
-            padding: 14px 20px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            width: 100%;
-            cursor: pointer;
+        .selection-card .card-icon-large {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-md);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            transition: var(--transition);
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-            margin-top: 12px;
-            box-shadow: var(--shadow-sm);
+            font-size: 1.5rem;
+            background: var(--gray-100);
+            color: var(--primary);
+            flex-shrink: 0;
         }
 
-        .btn:hover {
-            background: var(--primary-light);
+        .selection-card .card-info {
+            flex: 1;
+        }
+
+        .selection-card .card-info h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 3px;
+        }
+
+        .selection-card .card-info p {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            line-height: 1.4;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            text-align: center;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--white);
             box-shadow: var(--shadow-md);
         }
 
-        .btn:active {
-            transform: scale(0.97);
+        .btn-primary:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
         }
 
-        .btn:disabled {
-            background: #94a3b8;
-            cursor: not-allowed;
-            box-shadow: none;
+        .btn-primary:active {
+            transform: scale(0.97);
         }
 
         .btn-outline {
             background: transparent;
-            border: 2px solid var(--primary-dark);
-            color: var(--primary-dark);
+            border: 2px solid var(--primary);
+            color: var(--primary);
         }
 
         .btn-outline:hover {
-            background: var(--primary-dark);
+            background: var(--primary);
             color: var(--white);
         }
 
-        .btn-small {
+        .btn-sm {
             width: auto;
-            padding: 10px 18px;
-            font-size: 0.85rem;
+            padding: 8px 16px;
+            font-size: 0.8rem;
         }
 
-        .btn-icon {
-            width: 44px;
-            height: 44px;
-            padding: 0;
-            border-radius: 50%;
+        .btn-block {
+            width: 100%;
         }
 
-        /* ============ Form Elements ============ */
+        /* Form Elements */
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
 
         .form-label {
             font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-dark);
+            font-weight: 700;
+            color: var(--gray-700);
             display: block;
             margin-bottom: 6px;
+            letter-spacing: 0.2px;
+        }
+
+        .form-label .required {
+            color: var(--danger);
         }
 
         .form-input, .form-select, .form-textarea {
             width: 100%;
             padding: 12px 16px;
-            border: 2px solid var(--border-color);
+            border: 2px solid var(--gray-200);
             border-radius: var(--radius-md);
             font-size: 0.9rem;
-            background: var(--bg-card);
+            background: var(--gray-50);
             transition: var(--transition);
-            -webkit-appearance: none;
-            font-family: inherit;
+            font-family: var(--font-sans);
+            color: var(--gray-800);
         }
 
         .form-input:focus, .form-select:focus, .form-textarea:focus {
             outline: none;
-            border-color: var(--primary-dark);
+            border-color: var(--primary);
             background: var(--white);
-            box-shadow: 0 0 0 3px rgba(10, 31, 59, 0.1);
+            box-shadow: 0 0 0 4px rgba(10, 31, 59, 0.08);
         }
 
         .form-textarea {
             resize: vertical;
-            min-height: 80px;
+            min-height: 90px;
         }
 
-        /* ============ Bottom Navigation ============ */
-        .bottom-nav {
-            display: flex;
-            justify-content: space-around;
-            background: var(--white);
-            border-top: 2px solid #e9edf4;
-            padding: 8px 8px 12px;
-            flex-shrink: 0;
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: var(--text-muted);
-            transition: var(--transition);
-            cursor: pointer;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-            padding: 6px 14px;
-            border-radius: var(--radius-sm);
-            text-decoration: none;
-            font-size: 0.7rem;
-            font-weight: 500;
-        }
-
-        .nav-item i {
-            font-size: 1.4rem;
-            margin-bottom: 3px;
-            transition: var(--transition);
-        }
-
-        .nav-item:active {
-            background: #f0f4fc;
-        }
-
-        .nav-item.active {
-            color: var(--primary-dark);
-            font-weight: 700;
-        }
-
-        .nav-item.active i {
-            transform: scale(1.1);
-        }
-
-        /* ============ Step Indicator ============ */
-        .step-indicator {
+        /* Step Indicator */
+        .step-progress {
             display: flex;
             align-items: center;
             gap: 0;
-            margin: 16px 0;
+            margin: 20px 0;
+            padding: 0 8px;
         }
 
-        .step-dot {
-            width: 32px;
-            height: 32px;
+        .step-circle {
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            background: var(--border-color);
+            background: var(--gray-200);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 0.8rem;
-            color: var(--text-muted);
+            font-weight: 800;
+            font-size: 0.85rem;
+            color: var(--gray-500);
             transition: var(--transition);
             flex-shrink: 0;
+            position: relative;
         }
 
-        .step-dot.active {
-            background: var(--primary-dark);
+        .step-circle.active {
+            background: var(--primary);
             color: var(--white);
+            box-shadow: 0 0 0 6px rgba(10, 31, 59, 0.15);
         }
 
-        .step-dot.completed {
-            background: var(--success-green);
+        .step-circle.completed {
+            background: var(--success);
             color: var(--white);
         }
 
         .step-line {
             flex: 1;
-            height: 2px;
-            background: var(--border-color);
-            margin: 0 4px;
+            height: 3px;
+            background: var(--gray-200);
+            margin: 0 8px;
+            border-radius: 2px;
             transition: var(--transition);
         }
 
         .step-line.completed {
-            background: var(--success-green);
+            background: var(--success);
         }
 
-        /* ============ Summary Cards ============ */
+        .step-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 0.7rem;
+            color: var(--gray-500);
+            font-weight: 600;
+            padding: 0 8px;
+        }
+
+        .step-labels .active-label {
+            color: var(--primary);
+        }
+
+        .step-labels .completed-label {
+            color: var(--success);
+        }
+
+        /* Summary Cards */
         .summary-card {
             border-radius: var(--radius-md);
-            padding: 14px;
-            margin: 10px 0;
+            padding: 14px 16px;
+            margin: 12px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
             font-size: 0.85rem;
         }
 
         .issue-summary {
             background: #fff8f0;
-            border-left: 4px solid var(--warning-orange);
+            border: 1px solid #ffe0b2;
+            border-left: 4px solid var(--warning);
         }
 
         .resolution-summary {
-            background: #f0fdf4;
-            border-left: 4px solid var(--success-green);
+            background: #f1f8e9;
+            border: 1px solid #c8e6c9;
+            border-left: 4px solid var(--success);
         }
 
-        /* ============ Photo Upload ============ */
+        .summary-card i {
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
+
+        /* Photo Upload */
         .photo-section {
-            margin: 16px 0;
-            padding: 16px;
-            background: var(--bg-card);
-            border-radius: var(--radius-md);
-            border: 2px dashed var(--border-color);
+            margin: 20px 0;
+            padding: 18px;
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            border: 2px dashed var(--gray-300);
+            transition: var(--transition);
+        }
+
+        .photo-section:hover {
+            border-color: var(--primary);
+            background: #f8faff;
         }
 
         .photo-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
+        }
+
+        .photo-header h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--gray-700);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .photo-count {
+            background: var(--info-light);
+            color: var(--info);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
         }
 
         .photo-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
+            gap: 10px;
         }
 
         .photo-thumb {
             aspect-ratio: 1;
-            background: var(--border-color);
+            background: var(--gray-200);
             border-radius: var(--radius-sm);
             position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-xs);
         }
 
         .photo-thumb img {
@@ -552,26 +788,32 @@
 
         .photo-remove {
             position: absolute;
-            top: 4px;
-            right: 4px;
-            background: rgba(220, 38, 38, 0.9);
+            top: 6px;
+            right: 6px;
+            background: rgba(198, 40, 40, 0.9);
             color: white;
             border: none;
             border-radius: 50%;
-            width: 24px;
-            height: 24px;
+            width: 26px;
+            height: 26px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             font-size: 12px;
             z-index: 2;
+            transition: var(--transition);
+        }
+
+        .photo-remove:hover {
+            background: var(--danger);
+            transform: scale(1.1);
         }
 
         .photo-add {
             background: var(--white);
-            border: 2px dashed var(--primary-dark);
-            color: var(--primary-dark);
+            border: 2px dashed var(--primary);
+            color: var(--primary);
             border-radius: var(--radius-sm);
             aspect-ratio: 1;
             display: flex;
@@ -581,111 +823,192 @@
             cursor: pointer;
             transition: var(--transition);
             font-size: 0.75rem;
-            font-weight: 600;
+            font-weight: 700;
+            gap: 4px;
         }
 
-        .photo-add:active {
-            background: #f0f4fc;
+        .photo-add:hover {
+            background: var(--info-light);
+            border-style: solid;
         }
 
         .photo-add i {
-            font-size: 1.5rem;
-            margin-bottom: 4px;
+            font-size: 1.6rem;
         }
 
         .photo-meta {
             font-size: 0.7rem;
-            color: var(--text-muted);
-            margin-top: 8px;
+            color: var(--gray-500);
+            margin-top: 10px;
             display: flex;
-            gap: 12px;
+            gap: 14px;
             flex-wrap: wrap;
+            padding: 8px 0;
         }
 
-        /* ============ Back Button ============ */
+        .photo-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            background: var(--white);
+            border-top: 2px solid var(--gray-100);
+            padding: 10px 12px 14px;
+            flex-shrink: 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.03);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--gray-400);
+            transition: var(--transition);
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-size: 0.68rem;
+            font-weight: 600;
+            gap: 4px;
+            position: relative;
+        }
+
+        .nav-item i {
+            font-size: 1.4rem;
+            transition: var(--transition);
+        }
+
+        .nav-item:hover {
+            color: var(--gray-600);
+            background: var(--gray-50);
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            width: 32px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 0 0 4px 4px;
+        }
+
+        .nav-item.active i {
+            transform: scale(1.1);
+        }
+
+        .nav-badge {
+            position: absolute;
+            top: 0;
+            right: 8px;
+            background: var(--danger);
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            font-size: 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        /* Back Button */
         .back-btn {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            background: none;
+            gap: 8px;
+            background: var(--gray-100);
             border: none;
-            color: var(--primary-dark);
+            color: var(--gray-700);
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             cursor: pointer;
-            padding: 8px 12px;
-            border-radius: 20px;
+            padding: 10px 18px;
+            border-radius: 30px;
             transition: var(--transition);
-            margin-bottom: 8px;
-        }
-
-        .back-btn:active {
-            background: #f0f4fc;
-        }
-
-        /* ============ Utilities ============ */
-        .hidden {
-            display: none !important;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .mb-2 {
-            margin-bottom: 8px;
-        }
-
-        .mb-3 {
             margin-bottom: 12px;
         }
 
-        .mb-4 {
-            margin-bottom: 16px;
+        .back-btn:hover {
+            background: var(--gray-200);
+            color: var(--primary);
         }
 
-        .mt-2 {
-            margin-top: 8px;
+        /* Status Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
         }
 
-        .mt-3 {
-            margin-top: 12px;
-        }
+        .badge-success { background: var(--success-light); color: var(--success); }
+        .badge-warning { background: var(--warning-light); color: var(--warning); }
+        .badge-danger { background: var(--danger-light); color: var(--danger); }
+        .badge-info { background: var(--info-light); color: var(--info); }
 
-        .mt-4 {
-            margin-top: 16px;
-        }
-
-        /* ============ Animations ============ */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        /* Animations */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .fade-in {
-            animation: fadeIn 0.3s ease;
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+        .slide-up {
+            animation: slideUp 0.4s ease;
         }
 
-        .loading {
-            animation: pulse 1.5s infinite;
+        .slide-in {
+            animation: slideIn 0.3s ease;
         }
 
-        /* ============ Print Styles ============ */
-        @media print {
-            body {
-                background: white;
+        /* Profile Section */
+        .profile-header {
+            text-align: center;
+            padding: 24px 0;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 16px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Responsive */
+        @media (max-width: 360px) {
+            .card-grid {
+                grid-template-columns: 1fr;
             }
-            .app-container {
-                box-shadow: none;
-                border: none;
-            }
-            .bottom-nav, .header {
-                display: none;
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -695,47 +1018,50 @@
         <!-- Header -->
         <header class="header">
             <div class="header-brand">
-                <h1>Citriot</h1>
+                <div class="header-logo">
+                    <i class="fas fa-microchip"></i>
+                    <h1>Citriot</h1>
+                </div>
                 <span class="header-subtitle">Service & Traceability Platform</span>
             </div>
-            <div class="tech-badge" id="techBadge">
-                <i class="fas fa-user-cog"></i> Tech #CT-4821
+            <div class="tech-badge" id="techBadge" title="Technician Profile">
+                <span class="online-dot"></span>
+                Tech #CT-4821
             </div>
         </header>
 
-        <!-- Main Content Area -->
+        <!-- Main Content -->
         <main class="main-content" id="mainContent"></main>
 
         <!-- Bottom Navigation -->
         <nav class="bottom-nav">
             <div class="nav-item active" data-screen="dashboard">
-                <i class="fas fa-home"></i>
-                <span>Home</span>
+                <i class="fas fa-th-large"></i>
+                <span>Dashboard</span>
             </div>
-            <div class="nav-item" data-screen="myjobs">
-                <i class="fas fa-briefcase"></i>
+            <div class="nav-item" data-screen="jobs">
+                <i class="fas fa-clipboard-list"></i>
                 <span>My Jobs</span>
+                <span class="nav-badge">3</span>
             </div>
             <div class="nav-item" data-screen="history">
-                <i class="fas fa-clock"></i>
+                <i class="fas fa-history"></i>
                 <span>History</span>
             </div>
             <div class="nav-item" data-screen="profile">
-                <i class="fas fa-user"></i>
+                <i class="fas fa-user-circle"></i>
                 <span>Profile</span>
             </div>
         </nav>
     </div>
 
-    <!-- Hidden file input for photo capture -->
     <input type="file" id="photoFileInput" accept="image/*" capture="environment" multiple style="display: none;">
 
     <script>
-        // ============ Application Core ============
-        const CitriotApp = (function() {
+        (function() {
             'use strict';
 
-            // Private state
+            // ============ Application State ============
             const state = {
                 currentScreen: 'dashboard',
                 selectedAction: null,
@@ -744,62 +1070,73 @@
                 selectedIssue: null,
                 selectedResolution: null,
                 currentPhotos: [],
-                technicianId: 'CT-4821',
-                technicianName: 'Rajesh Kumar'
+                technician: {
+                    id: 'CT-4821',
+                    name: 'Sehzan',
+                    role: 'Field Technician',
+                    experience: '2+ years',
+                    specialization: 'VTS & Cognisense Systems'
+                },
+                stats: {
+                    totalJobs: 147,
+                    completedToday: 3,
+                    pendingJobs: 2,
+                    activeAlerts: 1,
+                    photosUploaded: 89
+                }
             };
 
             // DOM Elements
             const mainContent = document.getElementById('mainContent');
             const navItems = document.querySelectorAll('.nav-item');
             const photoFileInput = document.getElementById('photoFileInput');
-            const techBadge = document.getElementById('techBadge');
 
-            // ============ Data Definitions ============
+            // ============ Fault & Resolution Data ============
             const faultData = {
                 vts: [
-                    { id: 'vts1', icon: 'fa-power-off', title: 'Device Not Powering ON', desc: 'Unit completely dead, no LED indicators' },
-                    { id: 'vts2', icon: 'fa-satellite-dish', title: 'GPS Not Working', desc: 'Location not updating or inaccurate' },
-                    { id: 'vts3', icon: 'fa-sim-card', title: 'SIM Not Detected', desc: 'SIM card error or not recognized' },
-                    { id: 'vts4', icon: 'fa-signal', title: 'No Network Signal', desc: 'Poor or no cellular connectivity' },
-                    { id: 'vts5', icon: 'fa-thermometer-half', title: 'Temperature Reading Wrong', desc: 'Incorrect temperature values' },
+                    { id: 'vts1', icon: 'fa-power-off', title: 'Device Not Powering ON', desc: 'Unit completely dead, no LED indicators, no response' },
+                    { id: 'vts2', icon: 'fa-satellite-dish', title: 'GPS Not Working', desc: 'Location not updating, inaccurate coordinates' },
+                    { id: 'vts3', icon: 'fa-sim-card', title: 'SIM Not Detected', desc: 'SIM card error, not recognized by device' },
+                    { id: 'vts4', icon: 'fa-signal', title: 'No Network Signal', desc: 'Poor or no cellular connectivity in area' },
+                    { id: 'vts5', icon: 'fa-thermometer-half', title: 'Temperature Reading Wrong', desc: 'Incorrect temperature values displayed' },
                     { id: 'vts6', icon: 'fa-wifi', title: 'Device Offline', desc: 'Device not communicating with server' },
-                    { id: 'vts7', icon: 'fa-plug', title: 'Wiring Loose', desc: 'Loose connections or damaged wires' },
+                    { id: 'vts7', icon: 'fa-plug', title: 'Wiring Loose', desc: 'Loose connections or damaged wiring harness' },
                     { id: 'vts8', icon: 'fa-battery-empty', title: 'Internal Battery Dead', desc: 'Backup battery not holding charge' },
-                    { id: 'vts9', icon: 'fa-broadcast-tower', title: 'Antenna Issue', desc: 'GPS/GSM antenna damaged' },
-                    { id: 'vts10', icon: 'fa-tools', title: 'Device Damaged', desc: 'Physical damage to unit' }
+                    { id: 'vts9', icon: 'fa-broadcast-tower', title: 'Antenna Issue', desc: 'GPS/GSM antenna damaged or disconnected' },
+                    { id: 'vts10', icon: 'fa-tools', title: 'Device Damaged', desc: 'Physical damage to unit or components' }
                 ],
                 cognisense: [
-                    { id: 'cog1', icon: 'fa-wave-square', title: 'High Vibration', desc: 'Vibration levels exceeding threshold' },
+                    { id: 'cog1', icon: 'fa-wave-square', title: 'High Vibration', desc: 'Vibration levels exceeding threshold limits' },
                     { id: 'cog2', icon: 'fa-microchip', title: 'Sensor Offline', desc: 'Sensor not responding or disconnected' },
-                    { id: 'cog3', icon: 'fa-temperature-high', title: 'High Temperature', desc: 'Motor running too hot' },
-                    { id: 'cog4', icon: 'fa-network-wired', title: 'Communication Failure', desc: 'Data not reaching server' },
-                    { id: 'cog5', icon: 'fa-grip-lines', title: 'Loose Mounting', desc: 'Sensor physically loose' },
-                    { id: 'cog6', icon: 'fa-align-center', title: 'Motor Misalignment', desc: 'Shaft misalignment detected' },
-                    { id: 'cog7', icon: 'fa-cog', title: 'Bearing Issue', desc: 'Bearing wear or damage' },
-                    { id: 'cog8', icon: 'fa-balance-scale', title: 'Calibration Error', desc: 'Readings out of calibration' },
-                    { id: 'cog9', icon: 'fa-bolt', title: 'Power Supply Issue', desc: 'Unstable power to sensor' },
-                    { id: 'cog10', icon: 'fa-sync', title: 'Data Not Syncing', desc: 'Historical data missing' }
+                    { id: 'cog3', icon: 'fa-temperature-high', title: 'High Temperature', desc: 'Motor running at elevated temperatures' },
+                    { id: 'cog4', icon: 'fa-network-wired', title: 'Communication Failure', desc: 'Data packets not reaching server' },
+                    { id: 'cog5', icon: 'fa-grip-lines', title: 'Loose Mounting', desc: 'Sensor bracket physically loose' },
+                    { id: 'cog6', icon: 'fa-align-center', title: 'Motor Misalignment', desc: 'Shaft misalignment detected by sensor' },
+                    { id: 'cog7', icon: 'fa-cog', title: 'Bearing Issue', desc: 'Bearing wear or damage indicated' },
+                    { id: 'cog8', icon: 'fa-balance-scale', title: 'Calibration Error', desc: 'Sensor readings out of calibration range' },
+                    { id: 'cog9', icon: 'fa-bolt', title: 'Power Supply Issue', desc: 'Unstable or insufficient power to sensor' },
+                    { id: 'cog10', icon: 'fa-sync', title: 'Data Not Syncing', desc: 'Historical data missing from dashboard' }
                 ]
             };
 
             const resolutionData = {
                 vts: [
-                    { id: 'res1', icon: 'fa-exchange-alt', title: 'Device Replaced', desc: 'Installed new replacement unit' },
-                    { id: 'res2', icon: 'fa-plug', title: 'Wiring Reconnected', desc: 'Secured and reconnected all wiring' },
-                    { id: 'res3', icon: 'fa-sim-card', title: 'SIM Replaced', desc: 'New SIM card installed and activated' },
-                    { id: 'res4', icon: 'fa-microchip', title: 'Firmware Updated', desc: 'Latest firmware version installed' },
-                    { id: 'res5', icon: 'fa-broadcast-tower', title: 'Antenna Replaced', desc: 'New antenna installed' },
-                    { id: 'res6', icon: 'fa-balance-scale', title: 'Calibration Done', desc: 'Device recalibrated successfully' },
-                    { id: 'res7', icon: 'fa-redo', title: 'Restarted Device', desc: 'Power cycled and reconfigured' }
+                    { id: 'res1', icon: 'fa-exchange-alt', title: 'Device Replaced', desc: 'Installed new replacement unit, tested all functions' },
+                    { id: 'res2', icon: 'fa-plug', title: 'Wiring Reconnected', desc: 'Secured and reconnected all wiring harnesses' },
+                    { id: 'res3', icon: 'fa-sim-card', title: 'SIM Replaced', desc: 'New SIM card installed and activated on network' },
+                    { id: 'res4', icon: 'fa-microchip', title: 'Firmware Updated', desc: 'Latest firmware version installed and verified' },
+                    { id: 'res5', icon: 'fa-broadcast-tower', title: 'Antenna Replaced', desc: 'New antenna installed with proper positioning' },
+                    { id: 'res6', icon: 'fa-balance-scale', title: 'Calibration Done', desc: 'Device recalibrated, all parameters verified' },
+                    { id: 'res7', icon: 'fa-redo', title: 'Restarted Device', desc: 'Power cycled and reconfigured successfully' }
                 ],
                 cognisense: [
-                    { id: 'cres1', icon: 'fa-balance-scale', title: 'Sensor Recalibrated', desc: 'Calibration parameters adjusted' },
-                    { id: 'cres2', icon: 'fa-exchange-alt', title: 'Device Replaced', desc: 'Faulty sensor replaced' },
-                    { id: 'cres3', icon: 'fa-microchip', title: 'Firmware Updated', desc: 'Sensor firmware upgraded' },
-                    { id: 'cres4', icon: 'fa-network-wired', title: 'Communication Restored', desc: 'Network connection re-established' },
-                    { id: 'cres5', icon: 'fa-grip-lines', title: 'Mounting Tightened', desc: 'Sensor bracket secured' },
-                    { id: 'cres6', icon: 'fa-search', title: 'Motor Inspection Suggested', desc: 'Detailed motor check recommended' },
-                    { id: 'cres7', icon: 'fa-redo', title: 'Device Rebooted', desc: 'Power cycle and reset performed' }
+                    { id: 'cres1', icon: 'fa-balance-scale', title: 'Sensor Recalibrated', desc: 'Calibration parameters adjusted and verified' },
+                    { id: 'cres2', icon: 'fa-exchange-alt', title: 'Device Replaced', desc: 'Faulty sensor replaced with new unit' },
+                    { id: 'cres3', icon: 'fa-microchip', title: 'Firmware Updated', desc: 'Sensor firmware upgraded to latest version' },
+                    { id: 'cres4', icon: 'fa-network-wired', title: 'Communication Restored', desc: 'Network connection re-established and stable' },
+                    { id: 'cres5', icon: 'fa-grip-lines', title: 'Mounting Tightened', desc: 'Sensor bracket secured and torqued properly' },
+                    { id: 'cres6', icon: 'fa-search', title: 'Motor Inspection Suggested', desc: 'Detailed motor check recommended to client' },
+                    { id: 'cres7', icon: 'fa-redo', title: 'Device Rebooted', desc: 'Power cycle and full system reset performed' }
                 ]
             };
 
@@ -817,10 +1154,11 @@
                             metadata: {
                                 timestamp: new Date().toLocaleString(),
                                 gps: '19.0760° N, 72.8777° E',
-                                technician: state.technicianId,
+                                technician: state.technician.id,
                                 fileName: file.name
                             }
                         });
+                        state.stats.photosUploaded++;
                         refreshPhotoGrid();
                     };
                     reader.readAsDataURL(file);
@@ -844,7 +1182,7 @@
                     html += `
                         <div class="photo-thumb">
                             <img src="${photo.dataUrl}" alt="Service photo" loading="lazy">
-                            <button class="photo-remove" data-photoid="${photo.id}" aria-label="Remove photo">
+                            <button class="photo-remove" data-photoid="${photo.id}" title="Remove photo">
                                 <i class="fas fa-times"></i>
                             </button>
                         </div>
@@ -852,15 +1190,14 @@
                 });
 
                 html += `
-                    <div class="photo-add" id="addPhotoBtn" role="button" aria-label="Add photo">
+                    <div class="photo-add" id="addPhotoBtn" title="Add photo">
                         <i class="fas fa-camera"></i>
-                        <span>Add</span>
+                        <span>Add Photo</span>
                     </div>
                 `;
 
                 photoGrid.innerHTML = html;
 
-                // Attach remove events
                 photoGrid.querySelectorAll('.photo-remove').forEach(btn => {
                     btn.addEventListener('click', function(e) {
                         e.stopPropagation();
@@ -868,7 +1205,6 @@
                     });
                 });
 
-                // Attach add photo event
                 const addBtn = document.getElementById('addPhotoBtn');
                 if (addBtn) {
                     addBtn.addEventListener('click', (e) => {
@@ -877,7 +1213,6 @@
                     });
                 }
 
-                // Update metadata display
                 const metaDiv = document.getElementById('photoMetadata');
                 if (metaDiv) {
                     if (state.currentPhotos.length > 0) {
@@ -885,11 +1220,16 @@
                         metaDiv.innerHTML = `
                             <span><i class="fas fa-map-marker-alt"></i> ${last.metadata.gps}</span>
                             <span><i class="fas fa-clock"></i> ${last.metadata.timestamp}</span>
-                            <span><i class="fas fa-user"></i> ${last.metadata.technician}</span>
+                            <span><i class="fas fa-user-check"></i> ${last.metadata.technician}</span>
                         `;
                     } else {
-                        metaDiv.innerHTML = '<span><i class="fas fa-camera"></i> GPS & timestamp auto-attached</span>';
+                        metaDiv.innerHTML = '<span><i class="fas fa-info-circle"></i> GPS coordinates & timestamp will be attached automatically</span>';
                     }
+                }
+
+                const photoCount = document.getElementById('photoCountBadge');
+                if (photoCount) {
+                    photoCount.textContent = `${state.currentPhotos.length} photo${state.currentPhotos.length !== 1 ? 's' : ''}`;
                 }
             }
 
@@ -897,14 +1237,12 @@
                 return `
                     <div class="photo-section">
                         <div class="photo-header">
-                            <strong><i class="fas fa-camera-retro"></i> Job Photos</strong>
-                            <span class="status-badge" style="background: var(--info-bg); color: var(--info-blue);">
-                                ${state.currentPhotos.length} photos
-                            </span>
+                            <h4><i class="fas fa-camera-retro"></i> Documentation Photos</h4>
+                            <span class="photo-count" id="photoCountBadge">${state.currentPhotos.length} photo${state.currentPhotos.length !== 1 ? 's' : ''}</span>
                         </div>
                         <div class="photo-grid" id="photoGrid"></div>
                         <div class="photo-meta" id="photoMetadata">
-                            <span><i class="fas fa-camera"></i> GPS & timestamp auto-attached</span>
+                            <span><i class="fas fa-info-circle"></i> GPS coordinates & timestamp will be attached automatically</span>
                         </div>
                     </div>
                 `;
@@ -916,30 +1254,102 @@
                 state.selectedProduct = null;
                 
                 const html = `
-                    <div class="fade-in">
+                    <div class="slide-up">
+                        <!-- Welcome Banner -->
+                        <div class="welcome-banner">
+                            <i class="fas fa-hand-sparkles"></i>
+                            <div class="welcome-text">
+                                <h3>Welcome back, ${state.technician.name.split(' ')[0]}! 👋</h3>
+                                <p>You have ${state.stats.pendingJobs} pending jobs today</p>
+                            </div>
+                        </div>
+
+                        <!-- Action Cards -->
                         <div class="card-grid">
-                            <div class="action-card service-card" id="serviceCard" role="button" tabindex="0">
-                                <i class="fas fa-tools"></i>
-                                <div>Service</div>
-                                <small>Diagnose & fix issues</small>
+                            <div class="action-card service-card" id="serviceCard">
+                                <div class="card-icon">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <h3>Service</h3>
+                                <p>Diagnose & fix existing devices</p>
                             </div>
-                            <div class="action-card install-card" id="installationCard" role="button" tabindex="0">
-                                <i class="fas fa-plus-circle"></i>
-                                <div>New Installation</div>
-                                <small>Register new device</small>
+                            <div class="action-card install-card" id="installationCard">
+                                <div class="card-icon">
+                                    <i class="fas fa-plus-circle"></i>
+                                </div>
+                                <h3>New Installation</h3>
+                                <p>Install & register new devices</p>
                             </div>
                         </div>
-                        
-                        <div class="stats-row">
-                            <span class="stat-pill"><i class="fas fa-briefcase"></i> My Jobs <strong>4</strong></span>
-                            <span class="stat-pill"><span class="status-badge status-warning">⚠️ 2 Pending</span></span>
-                            <span class="stat-pill"><span class="status-badge status-success">✅ 3 Today</span></span>
+
+                        <!-- Statistics -->
+                        <div class="stats-section">
+                            <div class="section-title">
+                                <i class="fas fa-chart-bar"></i> Today's Overview
+                            </div>
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <div class="stat-header">
+                                        <div class="stat-icon bg-blue-light"><i class="fas fa-briefcase"></i></div>
+                                    </div>
+                                    <div class="stat-value">${state.stats.totalJobs}</div>
+                                    <div class="stat-label">Total Jobs</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-header">
+                                        <div class="stat-icon bg-green-light"><i class="fas fa-check-circle"></i></div>
+                                    </div>
+                                    <div class="stat-value">${state.stats.completedToday}</div>
+                                    <div class="stat-label">Completed Today</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-header">
+                                        <div class="stat-icon bg-orange-light"><i class="fas fa-clock"></i></div>
+                                    </div>
+                                    <div class="stat-value">${state.stats.pendingJobs}</div>
+                                    <div class="stat-label">Pending Jobs</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-header">
+                                        <div class="stat-icon bg-red-light"><i class="fas fa-exclamation-triangle"></i></div>
+                                    </div>
+                                    <div class="stat-value">${state.stats.activeAlerts}</div>
+                                    <div class="stat-label">Active Alerts</div>
+                                </div>
+                            </div>
                         </div>
-                        
-                        <div style="margin-top:18px; background: var(--bg-card); border-radius: var(--radius-md); padding:14px;">
-                            <strong style="font-size:0.9rem;">📋 Recent Services</strong>
-                            <div style="font-size:0.8rem; margin-top:8px;">🔧 VTS · GPS Issue → Antenna Replaced</div>
-                            <div style="font-size:0.8rem;">⚙️ Cognisense · High Vibration → Recalibrated</div>
+
+                        <!-- Recent Activity -->
+                        <div class="stats-section">
+                            <div class="section-title">
+                                <i class="fas fa-history"></i> Recent Activity
+                            </div>
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <div class="activity-dot dot-success"></div>
+                                    <div class="activity-content">
+                                        <h4>VTS Service Completed</h4>
+                                        <p>GPS Issue resolved - Antenna Replaced</p>
+                                    </div>
+                                    <span class="activity-time">2h ago</span>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-dot dot-warning"></div>
+                                    <div class="activity-content">
+                                        <h4>Cognisense - Pending</h4>
+                                        <p>High vibration detected on MTR-07</p>
+                                    </div>
+                                    <span class="activity-time">5h ago</span>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-dot dot-info"></div>
+                                    <div class="activity-content">
+                                        <h4>New VTS Installation</h4>
+                                        <p>FreshLogistics - MH12AB1234</p>
+                                    </div>
+                                    <span class="activity-time">Yesterday</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -950,6 +1360,8 @@
                     state.selectedAction = 'service';
                     state.currentPhotos = [];
                     state.serviceStep = 1;
+                    state.selectedIssue = null;
+                    state.selectedResolution = null;
                     renderProductSelection();
                 });
                 
@@ -962,42 +1374,53 @@
 
             function renderProductSelection() {
                 const actionLabel = state.selectedAction === 'service' ? 'Service' : 'New Installation';
+                const actionIcon = state.selectedAction === 'service' ? 'fa-tools' : 'fa-plus-circle';
                 
                 const html = `
-                    <div class="fade-in">
+                    <div class="slide-in">
                         <button class="back-btn" id="backToDashboardBtn">
-                            <i class="fas fa-arrow-left"></i> Back to Dashboard
+                            <i class="fas fa-arrow-left"></i> Dashboard
                         </button>
                         
-                        <h3 style="margin:12px 0; color: var(--primary-dark);">
-                            ${actionLabel} · Select Product
-                        </h3>
-                        
-                        <div class="selection-card" id="vtsCard" role="button" tabindex="0">
-                            <i class="fas fa-truck"></i>
-                            <div class="card-content">
-                                <strong>VTS</strong>
-                                <small>Vehicle tracking for cold chain trucks</small>
+                        <div style="margin: 16px 0;">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+                                <i class="fas ${actionIcon}" style="font-size: 1.5rem; color: var(--primary);"></i>
+                                <h2 style="font-size: 1.3rem; font-weight: 800; color: var(--gray-800);">${actionLabel}</h2>
                             </div>
-                            <i class="fas fa-chevron-right" style="color:#94a3b8;"></i>
+                            <p style="color: var(--gray-500); font-size: 0.85rem;">Select the product you want to work on</p>
                         </div>
                         
-                        <div class="selection-card" id="cognisenseCard" role="button" tabindex="0">
-                            <i class="fas fa-cogs"></i>
-                            <div class="card-content">
-                                <strong>Cognisense</strong>
-                                <small>Motor predictive monitoring system</small>
+                        <div class="selection-card" id="vtsCard">
+                            <div class="card-icon-large">
+                                <i class="fas fa-truck"></i>
                             </div>
-                            <i class="fas fa-chevron-right" style="color:#94a3b8;"></i>
+                            <div class="card-info">
+                                <h4>VTS - Vehicle Tracking System</h4>
+                                <p>Used in cold chain trucks & refrigerated vehicles for real-time tracking and temperature monitoring</p>
+                            </div>
+                            <i class="fas fa-chevron-right" style="color: var(--gray-400);"></i>
                         </div>
                         
-                        <div class="selection-card" id="othersCard" role="button" tabindex="0">
-                            <i class="fas fa-wrench"></i>
-                            <div class="card-content">
-                                <strong>Others</strong>
-                                <small>Site work, panels, general activities</small>
+                        <div class="selection-card" id="cognisenseCard">
+                            <div class="card-icon-large">
+                                <i class="fas fa-cogs"></i>
                             </div>
-                            <i class="fas fa-chevron-right" style="color:#94a3b8;"></i>
+                            <div class="card-info">
+                                <h4>Cognisense - Predictive Monitoring</h4>
+                                <p>Motor predictive monitoring system for industrial machinery with vibration & temperature analysis</p>
+                            </div>
+                            <i class="fas fa-chevron-right" style="color: var(--gray-400);"></i>
+                        </div>
+                        
+                        <div class="selection-card" id="othersCard">
+                            <div class="card-icon-large">
+                                <i class="fas fa-wrench"></i>
+                            </div>
+                            <div class="card-info">
+                                <h4>Others - General Site Work</h4>
+                                <p>Panel installation, electrical maintenance, cable checking, demo activities & field support</p>
+                            </div>
+                            <i class="fas fa-chevron-right" style="color: var(--gray-400);"></i>
                         </div>
                     </div>
                 `;
@@ -1029,38 +1452,47 @@
                 
                 const issues = state.selectedProduct === 'vts' ? faultData.vts : faultData.cognisense;
                 const productName = state.selectedProduct === 'vts' ? 'VTS' : 'Cognisense';
+                const productIcon = state.selectedProduct === 'vts' ? 'fa-truck' : 'fa-cogs';
                 
                 const issuesHtml = issues.map(issue => `
-                    <div class="selection-card" data-issue-id="${issue.id}" data-issue-title="${issue.title}" role="button" tabindex="0">
-                        <i class="fas ${issue.icon}"></i>
-                        <div class="card-content">
-                            <strong>${issue.title}</strong>
-                            <small>${issue.desc}</small>
+                    <div class="selection-card" data-issue-id="${issue.id}" data-issue-title="${issue.title}">
+                        <div class="card-icon-large" style="background: var(--warning-light); color: var(--warning);">
+                            <i class="fas ${issue.icon}"></i>
                         </div>
-                        <i class="fas fa-chevron-right" style="color:#94a3b8;"></i>
+                        <div class="card-info">
+                            <h4>${issue.title}</h4>
+                            <p>${issue.desc}</p>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color: var(--gray-400);"></i>
                     </div>
                 `).join('');
 
                 const html = `
-                    <div class="fade-in">
+                    <div class="slide-in">
                         <button class="back-btn" id="backToProductsBtn">
-                            <i class="fas fa-arrow-left"></i> Back to Products
+                            <i class="fas fa-arrow-left"></i> Products
                         </button>
                         
-                        <div class="step-indicator">
-                            <div class="step-dot active">1</div>
+                        <div class="step-progress">
+                            <div class="step-circle active">1</div>
                             <div class="step-line"></div>
-                            <div class="step-dot">2</div>
+                            <div class="step-circle">2</div>
                             <div class="step-line"></div>
-                            <div class="step-dot">3</div>
+                            <div class="step-circle">3</div>
+                        </div>
+                        <div class="step-labels">
+                            <span class="active-label">Identify Issue</span>
+                            <span>Select Resolution</span>
+                            <span>Submit Details</span>
                         </div>
                         
-                        <h3 style="margin:12px 0; color: var(--primary-dark);">
-                            <i class="fas fa-search"></i> Step 1: What is the issue with ${productName}?
-                        </h3>
-                        <p style="color: var(--text-muted); font-size:0.85rem; margin-bottom:12px;">
-                            Select the primary fault detected
-                        </p>
+                        <div style="margin: 20px 0;">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+                                <i class="fas ${productIcon}" style="font-size: 1.5rem; color: var(--primary);"></i>
+                                <h2 style="font-size: 1.2rem; font-weight: 800; color: var(--gray-800);">Step 1: Identify the Issue</h2>
+                            </div>
+                            <p style="color: var(--gray-500); font-size: 0.85rem;">What problem are you facing with the ${productName} device?</p>
+                        </div>
                         
                         ${issuesHtml}
                     </div>
@@ -1091,41 +1523,51 @@
                 const resolutions = state.selectedProduct === 'vts' ? resolutionData.vts : resolutionData.cognisense;
                 
                 const resolutionsHtml = resolutions.map(res => `
-                    <div class="selection-card" data-resolution-id="${res.id}" data-resolution-title="${res.title}" role="button" tabindex="0">
-                        <i class="fas ${res.icon}"></i>
-                        <div class="card-content">
-                            <strong>${res.title}</strong>
-                            <small>${res.desc}</small>
+                    <div class="selection-card" data-resolution-id="${res.id}" data-resolution-title="${res.title}">
+                        <div class="card-icon-large" style="background: var(--success-light); color: var(--success);">
+                            <i class="fas ${res.icon}"></i>
                         </div>
-                        <i class="fas fa-chevron-right" style="color:#94a3b8;"></i>
+                        <div class="card-info">
+                            <h4>${res.title}</h4>
+                            <p>${res.desc}</p>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color: var(--gray-400);"></i>
                     </div>
                 `).join('');
 
                 const html = `
-                    <div class="fade-in">
+                    <div class="slide-in">
                         <button class="back-btn" id="backToIssuesBtn">
-                            <i class="fas fa-arrow-left"></i> Back to Issues
+                            <i class="fas fa-arrow-left"></i> Issues
                         </button>
                         
-                        <div class="step-indicator">
-                            <div class="step-dot completed"><i class="fas fa-check"></i></div>
+                        <div class="step-progress">
+                            <div class="step-circle completed"><i class="fas fa-check"></i></div>
                             <div class="step-line completed"></div>
-                            <div class="step-dot active">2</div>
+                            <div class="step-circle active">2</div>
                             <div class="step-line"></div>
-                            <div class="step-dot">3</div>
+                            <div class="step-circle">3</div>
+                        </div>
+                        <div class="step-labels">
+                            <span class="completed-label">Issue Identified</span>
+                            <span class="active-label">Select Resolution</span>
+                            <span>Submit Details</span>
                         </div>
                         
                         <div class="summary-card issue-summary">
-                            <strong><i class="fas fa-exclamation-triangle"></i> Issue Identified:</strong><br>
-                            <span style="color: var(--warning-orange);">${state.selectedIssue.title}</span>
+                            <i class="fas fa-exclamation-triangle" style="color: var(--warning);"></i>
+                            <div>
+                                <strong style="color: var(--gray-700);">Issue Identified:</strong><br>
+                                <span style="color: var(--warning); font-weight: 600;">${state.selectedIssue.title}</span>
+                            </div>
                         </div>
                         
-                        <h3 style="margin:12px 0; color: var(--primary-dark);">
-                            <i class="fas fa-wrench"></i> Step 2: How was it fixed?
-                        </h3>
-                        <p style="color: var(--text-muted); font-size:0.85rem; margin-bottom:12px;">
-                            Select the action taken to resolve the issue
-                        </p>
+                        <div style="margin: 16px 0;">
+                            <h2 style="font-size: 1.2rem; font-weight: 800; color: var(--gray-800); margin-bottom: 4px;">
+                                <i class="fas fa-wrench" style="color: var(--primary);"></i> Step 2: How was it resolved?
+                            </h2>
+                            <p style="color: var(--gray-500); font-size: 0.85rem;">Select the action taken to fix the issue</p>
+                        </div>
                         
                         ${resolutionsHtml}
                     </div>
@@ -1156,66 +1598,99 @@
                 
                 const deviceFields = state.selectedProduct === 'vts' ? `
                     <div class="form-group">
-                        <label class="form-label">Client Name *</label>
+                        <label class="form-label">Client Name <span class="required">*</span></label>
                         <input type="text" class="form-input" id="clientName" placeholder="Enter client name" value="FreshLogistics">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Vehicle Number *</label>
-                        <input type="text" class="form-input" id="vehicleNumber" placeholder="MH12AB1234">
+                        <label class="form-label">Vehicle Number <span class="required">*</span></label>
+                        <input type="text" class="form-input" id="vehicleNumber" placeholder="e.g., MH12AB1234">
                     </div>
                     <div class="form-group">
                         <label class="form-label">Device IMEI</label>
                         <input type="text" class="form-input" id="deviceImei" placeholder="IMEI number">
                     </div>
+                    <div class="form-group">
+                        <label class="form-label">SIM Number</label>
+                        <input type="text" class="form-input" id="simNumber" placeholder="SIM number">
+                    </div>
+                    <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+                        <span class="badge badge-success"><i class="fas fa-check"></i> GPS Active</span>
+                        <span class="badge badge-success"><i class="fas fa-check"></i> Ignition ON</span>
+                        <span class="badge badge-warning"><i class="fas fa-thermometer-half"></i> Temp: -18°C</span>
+                    </div>
                 ` : `
                     <div class="form-group">
-                        <label class="form-label">Factory Name *</label>
+                        <label class="form-label">Factory Name <span class="required">*</span></label>
                         <input type="text" class="form-input" id="factoryName" placeholder="Factory name" value="SteelPlant Ltd">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Motor ID *</label>
+                        <label class="form-label">Plant Area</label>
+                        <input type="text" class="form-input" id="plantArea" placeholder="Section B">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Motor ID <span class="required">*</span></label>
                         <input type="text" class="form-input" id="motorId" placeholder="MTR-09">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Machine Type</label>
+                        <input type="text" class="form-input" id="machineType" placeholder="Induction Motor">
+                    </div>
+                    <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+                        <span class="badge badge-success"><i class="fas fa-check"></i> RPM: 1480</span>
+                        <span class="badge badge-success"><i class="fas fa-check"></i> Vibration Normal</span>
+                        <span class="badge badge-warning"><i class="fas fa-thermometer-half"></i> Temp: 65°C</span>
                     </div>
                 `;
 
                 const html = `
-                    <div class="fade-in">
+                    <div class="slide-in">
                         <button class="back-btn" id="backToResolutionBtn">
-                            <i class="fas fa-arrow-left"></i> Back to Resolution
+                            <i class="fas fa-arrow-left"></i> Resolution
                         </button>
                         
-                        <div class="step-indicator">
-                            <div class="step-dot completed"><i class="fas fa-check"></i></div>
+                        <div class="step-progress">
+                            <div class="step-circle completed"><i class="fas fa-check"></i></div>
                             <div class="step-line completed"></div>
-                            <div class="step-dot completed"><i class="fas fa-check"></i></div>
+                            <div class="step-circle completed"><i class="fas fa-check"></i></div>
                             <div class="step-line completed"></div>
-                            <div class="step-dot active">3</div>
+                            <div class="step-circle active">3</div>
+                        </div>
+                        <div class="step-labels">
+                            <span class="completed-label">Issue</span>
+                            <span class="completed-label">Resolution</span>
+                            <span class="active-label">Details & Submit</span>
                         </div>
                         
                         <div class="summary-card issue-summary">
-                            <strong><i class="fas fa-exclamation-triangle"></i> Issue:</strong>
-                            <span style="color: var(--warning-orange);">${state.selectedIssue.title}</span>
+                            <i class="fas fa-exclamation-triangle" style="color: var(--warning);"></i>
+                            <div>
+                                <strong style="color: var(--gray-700);">Issue:</strong>
+                                <span style="color: var(--warning); font-weight: 600;">${state.selectedIssue.title}</span>
+                            </div>
                         </div>
                         
                         <div class="summary-card resolution-summary">
-                            <strong><i class="fas fa-check-circle"></i> Resolution:</strong>
-                            <span style="color: var(--success-green);">${state.selectedResolution.title}</span>
+                            <i class="fas fa-check-circle" style="color: var(--success);"></i>
+                            <div>
+                                <strong style="color: var(--gray-700);">Resolution:</strong>
+                                <span style="color: var(--success); font-weight: 600;">${state.selectedResolution.title}</span>
+                            </div>
                         </div>
                         
-                        <h3 style="margin:16px 0; color: var(--primary-dark);">
-                            <i class="fas fa-clipboard-check"></i> Step 3: Service Details
+                        <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--gray-800); margin: 20px 0 16px;">
+                            <i class="fas fa-clipboard-check" style="color: var(--primary);"></i> Step 3: Service Details
                         </h3>
                         
                         ${deviceFields}
                         
                         <div class="form-group">
                             <label class="form-label">Technician Remarks</label>
-                            <textarea class="form-textarea" id="remarks" placeholder="Additional observations..."></textarea>
+                            <textarea class="form-textarea" id="remarks" placeholder="Any additional observations or notes..."></textarea>
                         </div>
                         
                         ${createPhotoSection()}
                         
-                        <button class="btn" id="submitServiceBtn">
+                        <button class="btn btn-primary btn-block" id="submitServiceBtn" style="margin-top: 8px;">
                             <i class="fas fa-paper-plane"></i> Submit Service Report
                         </button>
                     </div>
@@ -1231,7 +1706,10 @@
                         return;
                     }
                     
-                    alert(`✅ Service Report Submitted!\n\nProduct: ${productName}\nIssue: ${state.selectedIssue.title}\nResolution: ${state.selectedResolution.title}\nPhotos: ${state.currentPhotos.length}\n\nGPS & timestamp auto-logged.`);
+                    state.stats.completedToday++;
+                    state.stats.pendingJobs--;
+                    
+                    alert(`✅ Service Report Submitted Successfully!\n\n📋 Product: ${productName}\n🔍 Issue: ${state.selectedIssue.title}\n🔧 Resolution: ${state.selectedResolution.title}\n📸 Photos: ${state.currentPhotos.length}\n\nGPS coordinates & timestamp have been automatically logged.\nTechnician: ${state.technician.name} (${state.technician.id})`);
                     
                     state.currentPhotos = [];
                     state.selectedIssue = null;
@@ -1245,40 +1723,53 @@
 
             function renderInstallationForm() {
                 const productName = state.selectedProduct === 'vts' ? 'VTS' : 'Cognisense';
+                const productIcon = state.selectedProduct === 'vts' ? 'fa-truck' : 'fa-cogs';
                 
                 const deviceFields = state.selectedProduct === 'vts' ? `
                     <div class="form-group">
-                        <label class="form-label">Client Name *</label>
-                        <input type="text" class="form-input" placeholder="Client name">
+                        <label class="form-label">Client Name <span class="required">*</span></label>
+                        <input type="text" class="form-input" placeholder="Enter client name">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Vehicle Number *</label>
-                        <input type="text" class="form-input" placeholder="MH12AB1234">
+                        <label class="form-label">Vehicle Number <span class="required">*</span></label>
+                        <input type="text" class="form-input" placeholder="e.g., MH12AB1234">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Device IMEI *</label>
-                        <input type="text" class="form-input" placeholder="IMEI">
+                        <label class="form-label">Device IMEI <span class="required">*</span></label>
+                        <input type="text" class="form-input" placeholder="IMEI number">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">SIM Number</label>
+                        <input type="text" class="form-input" placeholder="SIM number">
                     </div>
                 ` : `
                     <div class="form-group">
-                        <label class="form-label">Factory Name *</label>
-                        <input type="text" class="form-input" placeholder="Factory">
+                        <label class="form-label">Factory Name <span class="required">*</span></label>
+                        <input type="text" class="form-input" placeholder="Factory name">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Motor ID *</label>
+                        <label class="form-label">Motor ID <span class="required">*</span></label>
                         <input type="text" class="form-input" placeholder="MTR-XX">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Machine Type</label>
+                        <input type="text" class="form-input" placeholder="Motor type">
                     </div>
                 `;
 
                 const html = `
-                    <div class="fade-in">
+                    <div class="slide-in">
                         <button class="back-btn" id="backToProductsBtn">
-                            <i class="fas fa-arrow-left"></i> Back to Products
+                            <i class="fas fa-arrow-left"></i> Products
                         </button>
                         
-                        <h3 style="margin:12px 0; color: var(--primary-dark);">
-                            <i class="fas fa-plus-circle"></i> New ${productName} Installation
-                        </h3>
+                        <div style="margin: 16px 0;">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+                                <i class="fas ${productIcon}" style="font-size: 1.5rem; color: var(--primary);"></i>
+                                <h2 style="font-size: 1.3rem; font-weight: 800; color: var(--gray-800);">New ${productName} Installation</h2>
+                            </div>
+                            <p style="color: var(--gray-500); font-size: 0.85rem;">Register and install a new device</p>
+                        </div>
                         
                         ${deviceFields}
                         
@@ -1287,9 +1778,14 @@
                             <input type="date" class="form-input" value="2026-06-03">
                         </div>
                         
+                        <div class="form-group">
+                            <label class="form-label">Technician Notes</label>
+                            <textarea class="form-textarea" placeholder="Installation notes..."></textarea>
+                        </div>
+                        
                         ${createPhotoSection()}
                         
-                        <button class="btn" id="submitInstallBtn">
+                        <button class="btn btn-primary btn-block" id="submitInstallBtn">
                             <i class="fas fa-save"></i> Complete Installation
                         </button>
                     </div>
@@ -1301,10 +1797,15 @@
                 
                 document.getElementById('submitInstallBtn').addEventListener('click', () => {
                     if (state.currentPhotos.length === 0) {
-                        alert('⚠️ Please add installation photos');
+                        alert('⚠️ Please add at least one installation photo');
                         return;
                     }
-                    alert(`✅ ${productName} Installation completed with ${state.currentPhotos.length} photos`);
+                    
+                    state.stats.totalJobs++;
+                    state.stats.completedToday++;
+                    
+                    alert(`✅ ${productName} Installation Completed!\n\n📸 ${state.currentPhotos.length} photos attached\n📍 GPS & timestamp auto-logged\n👤 Technician: ${state.technician.name}`);
+                    
                     state.currentPhotos = [];
                     renderDashboard();
                 });
@@ -1314,20 +1815,19 @@
 
             function renderOthersForm() {
                 const html = `
-                    <div class="fade-in">
+                    <div class="slide-in">
                         <button class="back-btn" id="backToProductsBtn">
-                            <i class="fas fa-arrow-left"></i> Back to Products
+                            <i class="fas fa-arrow-left"></i> Products
                         </button>
                         
-                        <h3 style="margin:12px 0; color: var(--primary-dark);">
-                            <i class="fas fa-wrench"></i> Site Work / General
-                        </h3>
+                        <h2 style="font-size: 1.3rem; font-weight: 800; color: var(--gray-800); margin: 16px 0;">
+                            <i class="fas fa-wrench" style="color: var(--primary);"></i> Site Work / General
+                        </h2>
                         
                         <div class="form-group">
-                            <label class="form-label">Project Name *</label>
+                            <label class="form-label">Project Name <span class="required">*</span></label>
                             <input type="text" class="form-input" placeholder="Project name">
                         </div>
-                        
                         <div class="form-group">
                             <label class="form-label">Work Category</label>
                             <select class="form-select">
@@ -1335,22 +1835,25 @@
                                 <option>Panel Installation</option>
                                 <option>Cable Checking</option>
                                 <option>Demo Activity</option>
+                                <option>General Field Support</option>
                             </select>
                         </div>
-                        
                         <div class="form-group">
                             <label class="form-label">Hours Worked</label>
-                            <input type="number" class="form-input" value="3">
+                            <input type="number" class="form-input" value="3" min="1">
                         </div>
-                        
+                        <div class="form-group">
+                            <label class="form-label">Materials Used</label>
+                            <textarea class="form-textarea" rows="2" placeholder="List materials used..."></textarea>
+                        </div>
                         <div class="form-group">
                             <label class="form-label">Description</label>
-                            <textarea class="form-textarea" rows="3"></textarea>
+                            <textarea class="form-textarea" rows="3" placeholder="Work description..."></textarea>
                         </div>
                         
                         ${createPhotoSection()}
                         
-                        <button class="btn" id="submitOthersBtn">
+                        <button class="btn btn-primary btn-block" id="submitOthersBtn">
                             <i class="fas fa-check-circle"></i> Complete Work Report
                         </button>
                     </div>
@@ -1361,32 +1864,56 @@
                 document.getElementById('backToProductsBtn').addEventListener('click', renderProductSelection);
                 
                 document.getElementById('submitOthersBtn').addEventListener('click', () => {
-                    alert(`✅ Work report submitted with ${state.currentPhotos.length} photos`);
+                    alert(`✅ Work Report Submitted!\n\n📸 ${state.currentPhotos.length} site photos attached\n📍 Location & time auto-logged`);
                     state.currentPhotos = [];
+                    state.stats.completedToday++;
                     renderDashboard();
                 });
                 
                 refreshPhotoGrid();
             }
 
-            function renderMyJobs() {
+            function renderJobs() {
                 mainContent.innerHTML = `
-                    <div class="fade-in">
-                        <h3 style="margin-bottom:16px;">📋 My Jobs</h3>
-                        <div style="background: var(--bg-card); border-radius: var(--radius-md); padding:14px; margin-bottom:10px;">
-                            <strong>FreshLogistics</strong> · VTS Service<br>
-                            <small>Issue: GPS Not Working → Antenna Replaced</small>
-                            <div style="margin-top:6px;">
-                                <span class="status-badge status-success">✅ Completed</span>
-                                <span style="font-size:0.75rem; margin-left:8px;">📸 4 photos</span>
+                    <div class="slide-up">
+                        <h2 style="font-size: 1.3rem; font-weight: 800; color: var(--gray-800); margin-bottom: 16px;">
+                            <i class="fas fa-clipboard-list"></i> My Jobs
+                        </h2>
+                        
+                        <div style="background: var(--white); border-radius: var(--radius-lg); border: 1px solid var(--gray-200); padding: 16px; margin-bottom: 12px;">
+                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                                <div>
+                                    <h4 style="font-weight: 700; color: var(--gray-800);">FreshLogistics - VTS Service</h4>
+                                    <p style="font-size: 0.8rem; color: var(--gray-500);">Vehicle: MH12AB1234</p>
+                                </div>
+                                <span class="badge badge-success">Completed</span>
                             </div>
+                            <p style="font-size: 0.8rem; color: var(--gray-600);">Issue: GPS Not Working → Resolution: Antenna Replaced</p>
+                            <p style="font-size: 0.7rem; color: var(--gray-400); margin-top: 4px;">📸 4 photos • Today, 2:30 PM</p>
                         </div>
-                        <div style="background: var(--bg-card); border-radius: var(--radius-md); padding:14px; margin-bottom:10px;">
-                            <strong>SteelPlant Ltd</strong> · Cognisense<br>
-                            <small>Issue: High Vibration → Sensor Recalibrated</small>
-                            <div style="margin-top:6px;">
-                                <span class="status-badge status-warning">⏳ Pending</span>
+                        
+                        <div style="background: var(--white); border-radius: var(--radius-lg); border: 1px solid var(--gray-200); padding: 16px; margin-bottom: 12px;">
+                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                                <div>
+                                    <h4 style="font-weight: 700; color: var(--gray-800);">SteelPlant Ltd - Cognisense</h4>
+                                    <p style="font-size: 0.8rem; color: var(--gray-500);">Motor: MTR-07</p>
+                                </div>
+                                <span class="badge badge-warning">Pending</span>
                             </div>
+                            <p style="font-size: 0.8rem; color: var(--gray-600);">Issue: High Vibration → Pending Resolution</p>
+                            <p style="font-size: 0.7rem; color: var(--gray-400); margin-top: 4px;">⚠️ Action required</p>
+                        </div>
+                        
+                        <div style="background: var(--white); border-radius: var(--radius-lg); border: 1px solid var(--gray-200); padding: 16px;">
+                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                                <div>
+                                    <h4 style="font-weight: 700; color: var(--gray-800);">ColdChain India - VTS Installation</h4>
+                                    <p style="font-size: 0.8rem; color: var(--gray-500);">Vehicle: GJ05CD7890</p>
+                                </div>
+                                <span class="badge badge-info">Scheduled</span>
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--gray-600);">New device installation for cold chain monitoring</p>
+                            <p style="font-size: 0.7rem; color: var(--gray-400); margin-top: 4px;">📅 Tomorrow, 10:00 AM</p>
                         </div>
                     </div>
                 `;
@@ -1394,15 +1921,30 @@
 
             function renderHistory() {
                 mainContent.innerHTML = `
-                    <div class="fade-in">
-                        <h3 style="margin-bottom:16px;">📜 Service History</h3>
-                        <div style="padding:12px; border-left:3px solid var(--primary-dark); margin-bottom:12px;">
-                            <strong>VTS · GPS Issue</strong> · 2 days ago<br>
-                            <small style="color: var(--text-muted);">Resolution: Antenna Replaced · 3 photos</small>
+                    <div class="slide-up">
+                        <h2 style="font-size: 1.3rem; font-weight: 800; color: var(--gray-800); margin-bottom: 16px;">
+                            <i class="fas fa-history"></i> Service History
+                        </h2>
+                        
+                        <div style="padding: 14px; border-left: 3px solid var(--success); background: var(--gray-50); border-radius: var(--radius-sm); margin-bottom: 12px;">
+                            <h4 style="font-weight: 700; color: var(--gray-800);">VTS · GPS Issue Resolved</h4>
+                            <p style="font-size: 0.8rem; color: var(--gray-500);">Client: FreshLogistics | Vehicle: MH14CX9823</p>
+                            <p style="font-size: 0.8rem; color: var(--gray-600);">Resolution: Antenna Replaced · 📸 3 photos</p>
+                            <p style="font-size: 0.7rem; color: var(--gray-400);">2 days ago</p>
                         </div>
-                        <div style="padding:12px; border-left:3px solid var(--primary-dark); margin-bottom:12px;">
-                            <strong>Cognisense · Vibration</strong> · yesterday<br>
-                            <small style="color: var(--text-muted);">Resolution: Recalibrated · 2 photos</small>
+                        
+                        <div style="padding: 14px; border-left: 3px solid var(--success); background: var(--gray-50); border-radius: var(--radius-sm); margin-bottom: 12px;">
+                            <h4 style="font-weight: 700; color: var(--gray-800);">Cognisense · Vibration Issue</h4>
+                            <p style="font-size: 0.8rem; color: var(--gray-500);">Factory: SteelPlant Ltd | Motor: MTR-05</p>
+                            <p style="font-size: 0.8rem; color: var(--gray-600);">Resolution: Sensor Recalibrated · 📸 2 photos</p>
+                            <p style="font-size: 0.7rem; color: var(--gray-400);">Yesterday</p>
+                        </div>
+                        
+                        <div style="padding: 14px; border-left: 3px solid var(--info); background: var(--gray-50); border-radius: var(--radius-sm);">
+                            <h4 style="font-weight: 700; color: var(--gray-800);">VTS · New Installation</h4>
+                            <p style="font-size: 0.8rem; color: var(--gray-500);">Client: ColdChain India | Vehicle: GJ05CD7890</p>
+                            <p style="font-size: 0.8rem; color: var(--gray-600);">All systems tested and operational · 📸 5 photos</p>
+                            <p style="font-size: 0.7rem; color: var(--gray-400);">3 days ago</p>
                         </div>
                     </div>
                 `;
@@ -1410,17 +1952,40 @@
 
             function renderProfile() {
                 mainContent.innerHTML = `
-                    <div class="fade-in text-center" style="padding:20px;">
-                        <i class="fas fa-user-circle" style="font-size:4rem; color: var(--primary-dark);"></i>
-                        <h3>Technician ID: ${state.technicianId}</h3>
-                        <p style="color: var(--text-muted);">${state.technicianName}</p>
-                        <p style="color: var(--text-muted);">Active since 2024</p>
+                    <div class="slide-up">
+                        <div class="profile-header">
+                            <div class="profile-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h2 style="font-size: 1.3rem; font-weight: 800; color: var(--gray-800);">${state.technician.name}</h2>
+                            <p style="color: var(--gray-500);">${state.technician.role}</p>
+                            <span class="badge badge-info" style="margin-top: 8px;">ID: ${state.technician.id}</span>
+                        </div>
                         
-                        <div style="background: var(--bg-card); border-radius: var(--radius-md); padding:14px; margin-top:16px;">
-                            <strong>📊 Statistics</strong><br>
-                            <small>Total Services: 147</small><br>
-                            <small>Photos Uploaded: 89</small><br>
-                            <small>Success Rate: 98%</small>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px;">
+                            <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 14px; text-align: center;">
+                                <i class="fas fa-briefcase" style="font-size: 1.5rem; color: var(--primary); margin-bottom: 8px;"></i>
+                                <div style="font-size: 1.5rem; font-weight: 800; color: var(--gray-800);">${state.stats.totalJobs}</div>
+                                <div style="font-size: 0.75rem; color: var(--gray-500);">Total Jobs</div>
+                            </div>
+                            <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 14px; text-align: center;">
+                                <i class="fas fa-camera" style="font-size: 1.5rem; color: var(--primary); margin-bottom: 8px;"></i>
+                                <div style="font-size: 1.5rem; font-weight: 800; color: var(--gray-800);">${state.stats.photosUploaded}</div>
+                                <div style="font-size: 0.75rem; color: var(--gray-500);">Photos Uploaded</div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 16px; margin-top: 16px;">
+                            <h4 style="font-weight: 700; color: var(--gray-800); margin-bottom: 12px;">📋 Additional Info</h4>
+                            <p style="font-size: 0.85rem; color: var(--gray-600); margin-bottom: 8px;">
+                                <strong>Experience:</strong> ${state.technician.experience}
+                            </p>
+                            <p style="font-size: 0.85rem; color: var(--gray-600); margin-bottom: 8px;">
+                                <strong>Specialization:</strong> ${state.technician.specialization}
+                            </p>
+                            <p style="font-size: 0.85rem; color: var(--gray-600);">
+                                <strong>Status:</strong> <span class="badge badge-success">Active</span>
+                            </p>
                         </div>
                     </div>
                 `;
@@ -1432,15 +1997,11 @@
                 
                 switch(screen) {
                     case 'dashboard': renderDashboard(); break;
-                    case 'myjobs': renderMyJobs(); break;
+                    case 'jobs': renderJobs(); break;
                     case 'history': renderHistory(); break;
                     case 'profile': renderProfile(); break;
                 }
                 
-                updateNavActive(screen);
-            }
-
-            function updateNavActive(screen) {
                 navItems.forEach(item => {
                     item.classList.toggle('active', item.dataset.screen === screen);
                 });
@@ -1455,41 +2016,18 @@
 
             photoFileInput.addEventListener('change', handlePhotoUpload);
 
-            techBadge.addEventListener('click', () => {
-                alert(`Logged in as: ${state.technicianName}\nID: ${state.technicianId}`);
+            document.getElementById('techBadge').addEventListener('click', () => {
+                alert(`👤 Technician Profile\n\nName: ${state.technician.name}\nID: ${state.technician.id}\nRole: ${state.technician.role}\nExperience: ${state.technician.experience}\n\nStatus: Online & Active`);
             });
 
             // ============ Initialize ============
-            function init() {
-                renderDashboard();
-                console.log('✅ Citriot Service & Traceability Platform Ready');
-                console.log(`👤 Technician: ${state.technicianName} (${state.technicianId})`);
-                console.log('📱 Mobile-first design | 🚀 Production ready');
-            }
-
-            // Public API
-            return {
-                init,
-                setActiveScreen,
-                getState: () => state
-            };
+            renderDashboard();
+            
+            console.log('✅ Citriot Service & Traceability Platform');
+            console.log('👤 Logged in as:', state.technician.name);
+            console.log('📊 Dashboard ready for client review');
+            console.log('💡 No database required - All demo data loaded');
         })();
-
-        // Start the application
-        document.addEventListener('DOMContentLoaded', () => {
-            CitriotApp.init();
-        });
-
-        // Handle service worker for PWA (optional)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                // navigator.serviceWorker.register('/sw.js').then(registration => {
-                //     console.log('SW registered:', registration);
-                // }).catch(error => {
-                //     console.log('SW registration failed:', error);
-                // });
-            });
-        }
     </script>
 </body>
 </html>
