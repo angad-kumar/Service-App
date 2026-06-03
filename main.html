@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="description" content="Citriot Service & Traceability Platform - Vehicle tracking and predictive monitoring service management">
+    <meta name="theme-color" content="#0a1f3b">
+    <title>Citriot Service & Traceability Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============ CSS Variables ============ */
+        :root {
+            --primary-dark: #0a1f3b;
+            --primary-light: #1a3a5c;
+            --white: #ffffff;
+            --bg-light: #f5f7fb;
+            --bg-card: #f8fafd;
+            --border-color: #e2e8f0;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --success-green: #2e7d32;
+            --success-bg: #e8f5e9;
+            --warning-orange: #b45309;
+            --warning-bg: #fff3e0;
+            --danger-red: #b91c1c;
+            --danger-bg: #fee2e2;
+            --info-blue: #1e40af;
+            --info-bg: #e0e7ff;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.02);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+            --shadow-lg: 0 20px 35px rgba(0, 20, 40, 0.12);
+            --radius-sm: 12px;
+            --radius-md: 18px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --transition: all 0.2s ease;
+        }
+
+        /* ============ Global Styles ============ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            background: var(--bg-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 12px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ============ App Container ============ */
+        .app-container {
+            max-width: 480px;
+            width: 100%;
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            position: relative;
+            height: 90vh;
+            max-height: 900px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0, 32, 64, 0.08);
+        }
+
+        @media (min-width: 768px) {
+            .app-container {
+                max-width: 450px;
+                height: 92vh;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .app-container {
+                max-width: 480px;
+            }
+        }
+
+        /* ============ Header ============ */
+        .header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+            color: var(--white);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom-left-radius: var(--radius-lg);
+            border-bottom-right-radius: var(--radius-lg);
+            flex-shrink: 0;
+            box-shadow: var(--shadow-md);
+        }
+
+        .header-brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+
+        .header-subtitle {
+            font-size: 0.7rem;
+            opacity: 0.85;
+            font-weight: 400;
+        }
+
+        .tech-badge {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tech-badge:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* ============ Main Content ============ */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-color) transparent;
+            background: var(--white);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .main-content::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .main-content::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        /* ============ Cards ============ */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 16px 0 12px;
+        }
+
+        .action-card {
+            background: linear-gradient(135deg, #f0f4fc, #e8edf8);
+            border-radius: var(--radius-lg);
+            padding: 20px 16px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-dark);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 2px solid transparent;
+            cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: var(--radius-lg);
+        }
+
+        .action-card:active {
+            transform: scale(0.97);
+            border-color: var(--primary-dark);
+        }
+
+        .action-card i {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .action-card div, .action-card small {
+            position: relative;
+            z-index: 1;
+        }
+
+        .action-card.service-card {
+            border-left: 4px solid var(--warning-orange);
+        }
+
+        .action-card.install-card {
+            border-left: 4px solid var(--success-green);
+        }
+
+        /* ============ Stats Pills ============ */
+        .stats-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0 16px;
+        }
+
+        .stat-pill {
+            background: var(--bg-card);
+            border-radius: 30px;
+            padding: 8px 14px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .status-badge {
+            border-radius: 20px;
+            padding: 2px 10px;
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+
+        .status-success {
+            color: var(--success-green);
+            background: var(--success-bg);
+        }
+
+        .status-warning {
+            color: var(--warning-orange);
+            background: var(--warning-bg);
+        }
+
+        .status-danger {
+            color: var(--danger-red);
+            background: var(--danger-bg);
+        }
+
+        /* ============ Selection Cards ============ */
+        .selection-card {
+            background: var(--white);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .selection-card:active {
+            background: #f0f4fc;
+            border-color: var(--primary-dark);
+            transform: scale(0.98);
+        }
+
+        .selection-card.selected {
+            background: var(--info-bg);
+            border-color: var(--primary-dark);
+            border-width: 2px;
+        }
+
+        .selection-card i:first-child {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            width: 40px;
+            text-align: center;
+        }
+
+        .selection-card .card-content {
+            flex: 1;
+        }
+
+        .selection-card .card-content strong {
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .selection-card .card-content small {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* ============ Buttons ============ */
+        .btn {
+            background: var(--primary-dark);
+            color: var(--white);
+            border: none;
+            border-radius: 40px;
+            padding: 14px 20px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            width: 100%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: var(--transition);
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            margin-top: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn:hover {
+            background: var(--primary-light);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn:active {
+            transform: scale(0.97);
+        }
+
+        .btn:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-dark);
+            color: var(--primary-dark);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-dark);
+            color: var(--white);
+        }
+
+        .btn-small {
+            width: auto;
+            padding: 10px 18px;
+            font-size: 0.85rem;
+        }
+
+        .btn-icon {
+            width: 44px;
+            height: 44px;
+            padding: 0;
+            border-radius: 50%;
+        }
+
+        /* ============ Form Elements ============ */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            background: var(--bg-card);
+            transition: var(--transition);
+            -webkit-appearance: none;
+            font-family: inherit;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-dark);
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(10, 31, 59, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        /* ============ Bottom Navigation ============ */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            background: var(--white);
+            border-top: 2px solid #e9edf4;
+            padding: 8px 8px 12px;
+            flex-shrink: 0;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-muted);
+            transition: var(--transition);
+            cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            padding: 6px 14px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .nav-item i {
+            font-size: 1.4rem;
+            margin-bottom: 3px;
+            transition: var(--transition);
+        }
+
+        .nav-item:active {
+            background: #f0f4fc;
+        }
+
+        .nav-item.active {
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+
+        .nav-item.active i {
+            transform: scale(1.1);
+        }
+
+        /* ============ Step Indicator ============ */
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin: 16px 0;
+        }
+
+        .step-dot {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        .step-dot.active {
+            background: var(--primary-dark);
+            color: var(--white);
+        }
+
+        .step-dot.completed {
+            background: var(--success-green);
+            color: var(--white);
+        }
+
+        .step-line {
+            flex: 1;
+            height: 2px;
+            background: var(--border-color);
+            margin: 0 4px;
+            transition: var(--transition);
+        }
+
+        .step-line.completed {
+            background: var(--success-green);
+        }
+
+        /* ============ Summary Cards ============ */
+        .summary-card {
+            border-radius: var(--radius-md);
+            padding: 14px;
+            margin: 10px 0;
+            font-size: 0.85rem;
+        }
+
+        .issue-summary {
+            background: #fff8f0;
+            border-left: 4px solid var(--warning-orange);
+        }
+
+        .resolution-summary {
+            background: #f0fdf4;
+            border-left: 4px solid var(--success-green);
+        }
+
+        /* ============ Photo Upload ============ */
+        .photo-section {
+            margin: 16px 0;
+            padding: 16px;
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            border: 2px dashed var(--border-color);
+        }
+
+        .photo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .photo-thumb {
+            aspect-ratio: 1;
+            background: var(--border-color);
+            border-radius: var(--radius-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-remove {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: rgba(220, 38, 38, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+            z-index: 2;
+        }
+
+        .photo-add {
+            background: var(--white);
+            border: 2px dashed var(--primary-dark);
+            color: var(--primary-dark);
+            border-radius: var(--radius-sm);
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .photo-add:active {
+            background: #f0f4fc;
+        }
+
+        .photo-add i {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        .photo-meta {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* ============ Back Button ============ */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: none;
+            border: none;
+            color: var(--primary-dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 20px;
+            transition: var(--transition);
+            margin-bottom: 8px;
+        }
+
+        .back-btn:active {
+            background: #f0f4fc;
+        }
+
+        /* ============ Utilities ============ */
+        .hidden {
+            display: none !important;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-2 {
+            margin-bottom: 8px;
+        }
+
+        .mb-3 {
+            margin-bottom: 12px;
+        }
+
+        .mb-4 {
+            margin-bottom: 16px;
+        }
+
+        .mt-2 {
+            margin-top: 8px;
+        }
+
+        .mt-3 {
+            margin-top: 12px;
+        }
+
+        .mt-4 {
+            margin-top: 16px;
+        }
+
+        /* ============ Animations ============ */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .loading {
+            animation: pulse 1.5s infinite;
+        }
+
+        /* ============ Print Styles ============ */
+        @media print {
+            body {
+                background: white;
+            }
+            .app-container {
+                box-shadow: none;
+                border: none;
+            }
+            .bottom-nav, .header {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container" id="appContainer">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-brand">
+                <h1>Citriot</h1>
+                <span class="header-subtitle">Service & Traceability Platform</span>
+            </div>
+            <div class="tech-badge" id="techBadge">
+                <i class="fas fa-user-cog"></i> Tech #CT-4821
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main-content" id="mainContent"></main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <div class="nav-item active" data-screen="dashboard">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </div>
+            <div class="nav-item" data-screen="myjobs">
+                <i class="fas fa-briefcase"></i>
+                <span>My Jobs</span>
+            </div>
+            <div class="nav-item" data-screen="history">
+                <i class="fas fa-clock"></i>
+                <span>History</span>
+            </div>
+            <div class="nav-item" data-screen="profile">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Hidden file input for photo capture -->
+    <input type="file" id="photoFileInput" accept="image/*" capture="environment" multiple style="display: none;">
+
+    <script>
+        // ============ Application Core ============
+        const CitriotApp = (function() {
+            'use strict';
+
+            // Private state
+            const state = {
+                currentScreen: 'dashboard',
+                selectedAction: null,
+                selectedProduct: null,
+                serviceStep: 1,
+                selectedIssue: null,
+                selectedResolution: null,
+                currentPhotos: [],
+                technicianId: 'CT-4821',
+                technicianName: 'Rajesh Kumar'
+            };
+
+            // DOM Elements
+            const mainContent = document.getElementById('mainContent');
+            const navItems = document.querySelectorAll('.nav-item');
+            const photoFileInput = document.getElementById('photoFileInput');
+            const techBadge = document.getElementById('techBadge');
+
+            // ============ Data Definitions ============
+            const faultData = {
+                vts: [
+                    { id: 'vts1', icon: 'fa-power-off', title: 'Device Not Powering ON', desc: 'Unit completely dead, no LED indicators' },
+                    { id: 'vts2', icon: 'fa-satellite-dish', title: 'GPS Not Working', desc: 'Location not updating or inaccurate' },
+                    { id: 'vts3', icon: 'fa-sim-card', title: 'SIM Not Detected', desc: 'SIM card error or not recognized' },
+                    { id: 'vts4', icon: 'fa-signal', title: 'No Network Signal', desc: 'Poor or no cellular connectivity' },
+                    { id: 'vts5', icon: 'fa-thermometer-half', title: 'Temperature Reading Wrong', desc: 'Incorrect temperature values' },
+                    { id: 'vts6', icon: 'fa-wifi', title: 'Device Offline', desc: 'Device not communicating with server' },
+                    { id: 'vts7', icon: 'fa-plug', title: 'Wiring Loose', desc: 'Loose connections or damaged wires' },
+                    { id: 'vts8', icon: 'fa-battery-empty', title: 'Internal Battery Dead', desc: 'Backup battery not holding charge' },
+                    { id: 'vts9', icon: 'fa-broadcast-tower', title: 'Antenna Issue', desc: 'GPS/GSM antenna damaged' },
+                    { id: 'vts10', icon: 'fa-tools', title: 'Device Damaged', desc: 'Physical damage to unit' }
+                ],
+                cognisense: [
+                    { id: 'cog1', icon: 'fa-wave-square', title: 'High Vibration', desc: 'Vibration levels exceeding threshold' },
+                    { id: 'cog2', icon: 'fa-microchip', title: 'Sensor Offline', desc: 'Sensor not responding or disconnected' },
+                    { id: 'cog3', icon: 'fa-temperature-high', title: 'High Temperature', desc: 'Motor running too hot' },
+                    { id: 'cog4', icon: 'fa-network-wired', title: 'Communication Failure', desc: 'Data not reaching server' },
+                    { id: 'cog5', icon: 'fa-grip-lines', title: 'Loose Mounting', desc: 'Sensor physically loose' },
+                    { id: 'cog6', icon: 'fa-align-center', title: 'Motor Misalignment', desc: 'Shaft misalignment detected' },
+                    { id: 'cog7', icon: 'fa-cog', title: 'Bearing Issue', desc: 'Bearing wear or damage' },
+                    { id: 'cog8', icon: 'fa-balance-scale', title: 'Calibration Error', desc: 'Readings out of calibration' },
+                    { id: 'cog9', icon: 'fa-bolt', title: 'Power Supply Issue', desc: 'Unstable power to sensor' },
+                    { id: 'cog10', icon: 'fa-sync', title: 'Data Not Syncing', desc: 'Historical data missing' }
+                ]
+            };
+
+            const resolutionData = {
+                vts: [
+                    { id: 'res1', icon: 'fa-exchange-alt', title: 'Device Replaced', desc: 'Installed new replacement unit' },
+                    { id: 'res2', icon: 'fa-plug', title: 'Wiring Reconnected', desc: 'Secured and reconnected all wiring' },
+                    { id: 'res3', icon: 'fa-sim-card', title: 'SIM Replaced', desc: 'New SIM card installed and activated' },
+                    { id: 'res4', icon: 'fa-microchip', title: 'Firmware Updated', desc: 'Latest firmware version installed' },
+                    { id: 'res5', icon: 'fa-broadcast-tower', title: 'Antenna Replaced', desc: 'New antenna installed' },
+                    { id: 'res6', icon: 'fa-balance-scale', title: 'Calibration Done', desc: 'Device recalibrated successfully' },
+                    { id: 'res7', icon: 'fa-redo', title: 'Restarted Device', desc: 'Power cycled and reconfigured' }
+                ],
+                cognisense: [
+                    { id: 'cres1', icon: 'fa-balance-scale', title: 'Sensor Recalibrated', desc: 'Calibration parameters adjusted' },
+                    { id: 'cres2', icon: 'fa-exchange-alt', title: 'Device Replaced', desc: 'Faulty sensor replaced' },
+                    { id: 'cres3', icon: 'fa-microchip', title: 'Firmware Updated', desc: 'Sensor firmware upgraded' },
+                    { id: 'cres4', icon: 'fa-network-wired', title: 'Communication Restored', desc: 'Network connection re-established' },
+                    { id: 'cres5', icon: 'fa-grip-lines', title: 'Mounting Tightened', desc: 'Sensor bracket secured' },
+                    { id: 'cres6', icon: 'fa-search', title: 'Motor Inspection Suggested', desc: 'Detailed motor check recommended' },
+                    { id: 'cres7', icon: 'fa-redo', title: 'Device Rebooted', desc: 'Power cycle and reset performed' }
+                ]
+            };
+
+            // ============ Photo Management ============
+            function handlePhotoUpload(event) {
+                const files = event.target.files;
+                if (!files || files.length === 0) return;
+
+                Array.from(files).forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        state.currentPhotos.push({
+                            id: Date.now() + Math.random(),
+                            dataUrl: e.target.result,
+                            metadata: {
+                                timestamp: new Date().toLocaleString(),
+                                gps: '19.0760° N, 72.8777° E',
+                                technician: state.technicianId,
+                                fileName: file.name
+                            }
+                        });
+                        refreshPhotoGrid();
+                    };
+                    reader.readAsDataURL(file);
+                });
+                
+                photoFileInput.value = '';
+            }
+
+            function removePhoto(photoId) {
+                state.currentPhotos = state.currentPhotos.filter(p => p.id !== photoId);
+                refreshPhotoGrid();
+            }
+
+            function refreshPhotoGrid() {
+                const photoGrid = document.getElementById('photoGrid');
+                if (!photoGrid) return;
+
+                let html = '';
+                
+                state.currentPhotos.forEach(photo => {
+                    html += `
+                        <div class="photo-thumb">
+                            <img src="${photo.dataUrl}" alt="Service photo" loading="lazy">
+                            <button class="photo-remove" data-photoid="${photo.id}" aria-label="Remove photo">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    `;
+                });
+
+                html += `
+                    <div class="photo-add" id="addPhotoBtn" role="button" aria-label="Add photo">
+                        <i class="fas fa-camera"></i>
+                        <span>Add</span>
+                    </div>
+                `;
+
+                photoGrid.innerHTML = html;
+
+                // Attach remove events
+                photoGrid.querySelectorAll('.photo-remove').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        removePhoto(parseFloat(this.dataset.photoid));
+                    });
+                });
+
+                // Attach add photo event
+                const addBtn = document.getElementById('addPhotoBtn');
+                if (addBtn) {
+                    addBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        photoFileInput.click();
+                    });
+                }
+
+                // Update metadata display
+                const metaDiv = document.getElementById('photoMetadata');
+                if (metaDiv) {
+                    if (state.currentPhotos.length > 0) {
+                        const last = state.currentPhotos[state.currentPhotos.length - 1];
+                        metaDiv.innerHTML = `
+                            <span><i class="fas fa-map-marker-alt"></i> ${last.metadata.gps}</span>
+                            <span><i class="fas fa-clock"></i> ${last.metadata.timestamp}</span>
+                            <span><i class="fas fa-user"></i> ${last.metadata.technician}</span>
+                        `;
+                    } else {
+                        metaDiv.innerHTML = '<span><i class="fas fa-camera"></i> GPS & timestamp auto-attached</span>';
+                    }
+                }
+            }
+
+            function createPhotoSection() {
+                return `
+                    <div class="photo-section">
+                        <div class="photo-header">
+                            <strong><i class="fas fa-camera-retro"></i> Job Photos</strong>
+                            <span class="status-badge" style="background: var(--info-bg); color: var(--info-blue);">
+                                ${state.currentPhotos.length} photos
+                            </span>
+                        </div>
+                        <div class="photo-grid" id="photoGrid"></div>
+                        <div class="photo-meta" id="photoMetadata">
+                            <span><i class="fas fa-camera"></i> GPS & timestamp auto-attached</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // ============ Render Functions ============
+            function renderDashboard() {
+                state.selectedAction = null;
+                state.selectedProduct = null;
+                
+                const html = `
+                    <div class="fade-in">
+                        <div class="card-grid">
+                            <div class="action-card service-card" id="serviceCard" role="button" tabindex="0">
+                                <i class="fas fa-tools"></i>
+                                <div>Service</div>
+                                <small>Diagnose & fix issues</small>
+                            </div>
+                            <div class="action-card install-card" id="installationCard" role="button" tabindex="0">
+                                <i class="fas fa-plus-circle"></i>
+                                <div>New Installation</div>
+                                <small>Register new device</small>
+                            </div>
+                        </div>
+                        
+                        <div class="stats-row">
+                            <span class="stat-pill"><i class="fas fa-briefcase"></i> My Jobs <strong>4</strong></span>
+                            <span class="stat-pill"><span class="status-badge status-warning">⚠️ 2 Pending</span></span>
+                            <span class="stat-pill"><span class="status-badge status-success">✅ 3 Today</span></span>
+                        </div>
+                        
+                        <div style="margin-top:18px; background: var(--bg-card); border-radius: var(--radius-md); padding:14px;">
+                            <strong style="font-size:0.9rem;">📋 Recent Services</strong>
+                            <div style="font-size:0.8rem; margin-top:8px;">🔧 VTS · GPS Issue → Antenna Replaced</div>
+                            <div style="font-size:0.8rem;">⚙️ Cognisense · High Vibration → Recalibrated</div>
+                        </div>
+                    </div>
+                `;
+                
+                mainContent.innerHTML = html;
+                
+                document.getElementById('serviceCard').addEventListener('click', () => {
+                    state.selectedAction = 'service';
+                    state.currentPhotos = [];
+                    state.serviceStep = 1;
+                    renderProductSelection();
+                });
+                
+                document.getElementById('installationCard').addEventListener('click', () => {
+                    state.selectedAction = 'installation';
+                    state.currentPhotos = [];
+                    renderProductSelection();
+                });
+            }
+
+            function renderProductSelection() {
+                const actionLabel = state.selectedAction === 'service' ? 'Service' : 'New Installation';
+                
+                const html = `
+                    <div class="fade-in">
+                        <button class="back-btn" id="backToDashboardBtn">
+                            <i class="fas fa-arrow-left"></i> Back to Dashboard
+                        </button>
+                        
+                        <h3 style="margin:12px 0; color: var(--primary-dark);">
+                            ${actionLabel} · Select Product
+                        </h3>
+                        
+                        <div class="selection-card" id="vtsCard" role="button" tabindex="0">
+                            <i class="fas fa-truck"></i>
+                            <div class="card-content">
+                                <strong>VTS</strong>
+                                <small>Vehicle tracking for cold chain trucks</small>
+                            </div>
+                            <i class="fas fa-chevron-right" style="color:#94a3b8;"></i>
+                        </div>
+                        
+                        <div class="selection-card" id="cognisenseCard" role="button" tabindex="0">
+                            <i class="fas fa-cogs"></i>
+                            <div class="card-content">
+                                <strong>Cognisense</strong>
+                                <small>Motor predictive monitoring system</small>
+                            </div>
+                            <i class="fas fa-chevron-right" style="color:#94a3b8;"></i>
+                        </div>
+                        
+                        <div class="selection-card" id="othersCard" role="button" tabindex="0">
+                            <i class="fas fa-wrench"></i>
+                            <div class="card-content">
+                                <strong>Others</strong>
+                                <small>Site work, panels, general activities</small>
+                            </div>
+                            <i class="fas fa-chevron-right" style="color:#94a3b8;"></i>
+                        </div>
+                    </div>
+                `;
+                
+                mainContent.innerHTML = html;
+                
+                document.getElementById('backToDashboardBtn').addEventListener('click', renderDashboard);
+                
+                document.getElementById('vtsCard').addEventListener('click', () => {
+                    state.selectedProduct = 'vts';
+                    state.selectedAction === 'service' ? renderIssueSelection() : renderInstallationForm();
+                });
+                
+                document.getElementById('cognisenseCard').addEventListener('click', () => {
+                    state.selectedProduct = 'cognisense';
+                    state.selectedAction === 'service' ? renderIssueSelection() : renderInstallationForm();
+                });
+                
+                document.getElementById('othersCard').addEventListener('click', () => {
+                    state.selectedProduct = 'others';
+                    renderOthersForm();
+                });
+            }
+
+            function renderIssueSelection() {
+                state.serviceStep = 1;
+                state.selectedIssue = null;
+                state.selectedResolution = null;
+                
+                const issues = state.selectedProduct === 'vts' ? faultData.vts : faultData.cognisense;
+                const productName = state.selectedProduct === 'vts' ? 'VTS' : 'Cognisense';
+                
+                const issuesHtml = issues.map(issue => `
+                    <div class="selection-card" data-issue-id="${issue.id}" data-issue-title="${issue.title}" role="button" tabindex="0">
+                        <i class="fas ${issue.icon}"></i>
+                        <div class="card-content">
+                            <strong>${issue.title}</strong>
+                            <small>${issue.desc}</small>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color:#94a3b8;"></i>
+                    </div>
+                `).join('');
+
+                const html = `
+                    <div class="fade-in">
+                        <button class="back-btn" id="backToProductsBtn">
+                            <i class="fas fa-arrow-left"></i> Back to Products
+                        </button>
+                        
+                        <div class="step-indicator">
+                            <div class="step-dot active">1</div>
+                            <div class="step-line"></div>
+                            <div class="step-dot">2</div>
+                            <div class="step-line"></div>
+                            <div class="step-dot">3</div>
+                        </div>
+                        
+                        <h3 style="margin:12px 0; color: var(--primary-dark);">
+                            <i class="fas fa-search"></i> Step 1: What is the issue with ${productName}?
+                        </h3>
+                        <p style="color: var(--text-muted); font-size:0.85rem; margin-bottom:12px;">
+                            Select the primary fault detected
+                        </p>
+                        
+                        ${issuesHtml}
+                    </div>
+                `;
+                
+                mainContent.innerHTML = html;
+                
+                document.getElementById('backToProductsBtn').addEventListener('click', renderProductSelection);
+                
+                document.querySelectorAll('.selection-card').forEach(card => {
+                    card.addEventListener('click', function() {
+                        state.selectedIssue = {
+                            id: this.dataset.issueId,
+                            title: this.dataset.issueTitle
+                        };
+                        
+                        document.querySelectorAll('.selection-card').forEach(c => c.classList.remove('selected'));
+                        this.classList.add('selected');
+                        
+                        setTimeout(() => renderResolutionSelection(), 300);
+                    });
+                });
+            }
+
+            function renderResolutionSelection() {
+                state.serviceStep = 2;
+                
+                const resolutions = state.selectedProduct === 'vts' ? resolutionData.vts : resolutionData.cognisense;
+                
+                const resolutionsHtml = resolutions.map(res => `
+                    <div class="selection-card" data-resolution-id="${res.id}" data-resolution-title="${res.title}" role="button" tabindex="0">
+                        <i class="fas ${res.icon}"></i>
+                        <div class="card-content">
+                            <strong>${res.title}</strong>
+                            <small>${res.desc}</small>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color:#94a3b8;"></i>
+                    </div>
+                `).join('');
+
+                const html = `
+                    <div class="fade-in">
+                        <button class="back-btn" id="backToIssuesBtn">
+                            <i class="fas fa-arrow-left"></i> Back to Issues
+                        </button>
+                        
+                        <div class="step-indicator">
+                            <div class="step-dot completed"><i class="fas fa-check"></i></div>
+                            <div class="step-line completed"></div>
+                            <div class="step-dot active">2</div>
+                            <div class="step-line"></div>
+                            <div class="step-dot">3</div>
+                        </div>
+                        
+                        <div class="summary-card issue-summary">
+                            <strong><i class="fas fa-exclamation-triangle"></i> Issue Identified:</strong><br>
+                            <span style="color: var(--warning-orange);">${state.selectedIssue.title}</span>
+                        </div>
+                        
+                        <h3 style="margin:12px 0; color: var(--primary-dark);">
+                            <i class="fas fa-wrench"></i> Step 2: How was it fixed?
+                        </h3>
+                        <p style="color: var(--text-muted); font-size:0.85rem; margin-bottom:12px;">
+                            Select the action taken to resolve the issue
+                        </p>
+                        
+                        ${resolutionsHtml}
+                    </div>
+                `;
+                
+                mainContent.innerHTML = html;
+                
+                document.getElementById('backToIssuesBtn').addEventListener('click', renderIssueSelection);
+                
+                document.querySelectorAll('.selection-card').forEach(card => {
+                    card.addEventListener('click', function() {
+                        state.selectedResolution = {
+                            id: this.dataset.resolutionId,
+                            title: this.dataset.resolutionTitle
+                        };
+                        
+                        document.querySelectorAll('.selection-card').forEach(c => c.classList.remove('selected'));
+                        this.classList.add('selected');
+                        
+                        setTimeout(() => renderServiceDetails(), 300);
+                    });
+                });
+            }
+
+            function renderServiceDetails() {
+                state.serviceStep = 3;
+                const productName = state.selectedProduct === 'vts' ? 'VTS' : 'Cognisense';
+                
+                const deviceFields = state.selectedProduct === 'vts' ? `
+                    <div class="form-group">
+                        <label class="form-label">Client Name *</label>
+                        <input type="text" class="form-input" id="clientName" placeholder="Enter client name" value="FreshLogistics">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Vehicle Number *</label>
+                        <input type="text" class="form-input" id="vehicleNumber" placeholder="MH12AB1234">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Device IMEI</label>
+                        <input type="text" class="form-input" id="deviceImei" placeholder="IMEI number">
+                    </div>
+                ` : `
+                    <div class="form-group">
+                        <label class="form-label">Factory Name *</label>
+                        <input type="text" class="form-input" id="factoryName" placeholder="Factory name" value="SteelPlant Ltd">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Motor ID *</label>
+                        <input type="text" class="form-input" id="motorId" placeholder="MTR-09">
+                    </div>
+                `;
+
+                const html = `
+                    <div class="fade-in">
+                        <button class="back-btn" id="backToResolutionBtn">
+                            <i class="fas fa-arrow-left"></i> Back to Resolution
+                        </button>
+                        
+                        <div class="step-indicator">
+                            <div class="step-dot completed"><i class="fas fa-check"></i></div>
+                            <div class="step-line completed"></div>
+                            <div class="step-dot completed"><i class="fas fa-check"></i></div>
+                            <div class="step-line completed"></div>
+                            <div class="step-dot active">3</div>
+                        </div>
+                        
+                        <div class="summary-card issue-summary">
+                            <strong><i class="fas fa-exclamation-triangle"></i> Issue:</strong>
+                            <span style="color: var(--warning-orange);">${state.selectedIssue.title}</span>
+                        </div>
+                        
+                        <div class="summary-card resolution-summary">
+                            <strong><i class="fas fa-check-circle"></i> Resolution:</strong>
+                            <span style="color: var(--success-green);">${state.selectedResolution.title}</span>
+                        </div>
+                        
+                        <h3 style="margin:16px 0; color: var(--primary-dark);">
+                            <i class="fas fa-clipboard-check"></i> Step 3: Service Details
+                        </h3>
+                        
+                        ${deviceFields}
+                        
+                        <div class="form-group">
+                            <label class="form-label">Technician Remarks</label>
+                            <textarea class="form-textarea" id="remarks" placeholder="Additional observations..."></textarea>
+                        </div>
+                        
+                        ${createPhotoSection()}
+                        
+                        <button class="btn" id="submitServiceBtn">
+                            <i class="fas fa-paper-plane"></i> Submit Service Report
+                        </button>
+                    </div>
+                `;
+                
+                mainContent.innerHTML = html;
+                
+                document.getElementById('backToResolutionBtn').addEventListener('click', renderResolutionSelection);
+                
+                document.getElementById('submitServiceBtn').addEventListener('click', () => {
+                    if (state.currentPhotos.length === 0) {
+                        alert('⚠️ Please add at least one photo documenting the issue and resolution');
+                        return;
+                    }
+                    
+                    alert(`✅ Service Report Submitted!\n\nProduct: ${productName}\nIssue: ${state.selectedIssue.title}\nResolution: ${state.selectedResolution.title}\nPhotos: ${state.currentPhotos.length}\n\nGPS & timestamp auto-logged.`);
+                    
+                    state.currentPhotos = [];
+                    state.selectedIssue = null;
+                    state.selectedResolution = null;
+                    state.serviceStep = 1;
+                    renderDashboard();
+                });
+                
+                refreshPhotoGrid();
+            }
+
+            function renderInstallationForm() {
+                const productName = state.selectedProduct === 'vts' ? 'VTS' : 'Cognisense';
+                
+                const deviceFields = state.selectedProduct === 'vts' ? `
+                    <div class="form-group">
+                        <label class="form-label">Client Name *</label>
+                        <input type="text" class="form-input" placeholder="Client name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Vehicle Number *</label>
+                        <input type="text" class="form-input" placeholder="MH12AB1234">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Device IMEI *</label>
+                        <input type="text" class="form-input" placeholder="IMEI">
+                    </div>
+                ` : `
+                    <div class="form-group">
+                        <label class="form-label">Factory Name *</label>
+                        <input type="text" class="form-input" placeholder="Factory">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Motor ID *</label>
+                        <input type="text" class="form-input" placeholder="MTR-XX">
+                    </div>
+                `;
+
+                const html = `
+                    <div class="fade-in">
+                        <button class="back-btn" id="backToProductsBtn">
+                            <i class="fas fa-arrow-left"></i> Back to Products
+                        </button>
+                        
+                        <h3 style="margin:12px 0; color: var(--primary-dark);">
+                            <i class="fas fa-plus-circle"></i> New ${productName} Installation
+                        </h3>
+                        
+                        ${deviceFields}
+                        
+                        <div class="form-group">
+                            <label class="form-label">Installation Date</label>
+                            <input type="date" class="form-input" value="2026-06-03">
+                        </div>
+                        
+                        ${createPhotoSection()}
+                        
+                        <button class="btn" id="submitInstallBtn">
+                            <i class="fas fa-save"></i> Complete Installation
+                        </button>
+                    </div>
+                `;
+                
+                mainContent.innerHTML = html;
+                
+                document.getElementById('backToProductsBtn').addEventListener('click', renderProductSelection);
+                
+                document.getElementById('submitInstallBtn').addEventListener('click', () => {
+                    if (state.currentPhotos.length === 0) {
+                        alert('⚠️ Please add installation photos');
+                        return;
+                    }
+                    alert(`✅ ${productName} Installation completed with ${state.currentPhotos.length} photos`);
+                    state.currentPhotos = [];
+                    renderDashboard();
+                });
+                
+                refreshPhotoGrid();
+            }
+
+            function renderOthersForm() {
+                const html = `
+                    <div class="fade-in">
+                        <button class="back-btn" id="backToProductsBtn">
+                            <i class="fas fa-arrow-left"></i> Back to Products
+                        </button>
+                        
+                        <h3 style="margin:12px 0; color: var(--primary-dark);">
+                            <i class="fas fa-wrench"></i> Site Work / General
+                        </h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Project Name *</label>
+                            <input type="text" class="form-input" placeholder="Project name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Work Category</label>
+                            <select class="form-select">
+                                <option>Electrical Maintenance</option>
+                                <option>Panel Installation</option>
+                                <option>Cable Checking</option>
+                                <option>Demo Activity</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Hours Worked</label>
+                            <input type="number" class="form-input" value="3">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-textarea" rows="3"></textarea>
+                        </div>
+                        
+                        ${createPhotoSection()}
+                        
+                        <button class="btn" id="submitOthersBtn">
+                            <i class="fas fa-check-circle"></i> Complete Work Report
+                        </button>
+                    </div>
+                `;
+                
+                mainContent.innerHTML = html;
+                
+                document.getElementById('backToProductsBtn').addEventListener('click', renderProductSelection);
+                
+                document.getElementById('submitOthersBtn').addEventListener('click', () => {
+                    alert(`✅ Work report submitted with ${state.currentPhotos.length} photos`);
+                    state.currentPhotos = [];
+                    renderDashboard();
+                });
+                
+                refreshPhotoGrid();
+            }
+
+            function renderMyJobs() {
+                mainContent.innerHTML = `
+                    <div class="fade-in">
+                        <h3 style="margin-bottom:16px;">📋 My Jobs</h3>
+                        <div style="background: var(--bg-card); border-radius: var(--radius-md); padding:14px; margin-bottom:10px;">
+                            <strong>FreshLogistics</strong> · VTS Service<br>
+                            <small>Issue: GPS Not Working → Antenna Replaced</small>
+                            <div style="margin-top:6px;">
+                                <span class="status-badge status-success">✅ Completed</span>
+                                <span style="font-size:0.75rem; margin-left:8px;">📸 4 photos</span>
+                            </div>
+                        </div>
+                        <div style="background: var(--bg-card); border-radius: var(--radius-md); padding:14px; margin-bottom:10px;">
+                            <strong>SteelPlant Ltd</strong> · Cognisense<br>
+                            <small>Issue: High Vibration → Sensor Recalibrated</small>
+                            <div style="margin-top:6px;">
+                                <span class="status-badge status-warning">⏳ Pending</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function renderHistory() {
+                mainContent.innerHTML = `
+                    <div class="fade-in">
+                        <h3 style="margin-bottom:16px;">📜 Service History</h3>
+                        <div style="padding:12px; border-left:3px solid var(--primary-dark); margin-bottom:12px;">
+                            <strong>VTS · GPS Issue</strong> · 2 days ago<br>
+                            <small style="color: var(--text-muted);">Resolution: Antenna Replaced · 3 photos</small>
+                        </div>
+                        <div style="padding:12px; border-left:3px solid var(--primary-dark); margin-bottom:12px;">
+                            <strong>Cognisense · Vibration</strong> · yesterday<br>
+                            <small style="color: var(--text-muted);">Resolution: Recalibrated · 2 photos</small>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function renderProfile() {
+                mainContent.innerHTML = `
+                    <div class="fade-in text-center" style="padding:20px;">
+                        <i class="fas fa-user-circle" style="font-size:4rem; color: var(--primary-dark);"></i>
+                        <h3>Technician ID: ${state.technicianId}</h3>
+                        <p style="color: var(--text-muted);">${state.technicianName}</p>
+                        <p style="color: var(--text-muted);">Active since 2024</p>
+                        
+                        <div style="background: var(--bg-card); border-radius: var(--radius-md); padding:14px; margin-top:16px;">
+                            <strong>📊 Statistics</strong><br>
+                            <small>Total Services: 147</small><br>
+                            <small>Photos Uploaded: 89</small><br>
+                            <small>Success Rate: 98%</small>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // ============ Navigation ============
+            function setActiveScreen(screen) {
+                state.currentScreen = screen;
+                
+                switch(screen) {
+                    case 'dashboard': renderDashboard(); break;
+                    case 'myjobs': renderMyJobs(); break;
+                    case 'history': renderHistory(); break;
+                    case 'profile': renderProfile(); break;
+                }
+                
+                updateNavActive(screen);
+            }
+
+            function updateNavActive(screen) {
+                navItems.forEach(item => {
+                    item.classList.toggle('active', item.dataset.screen === screen);
+                });
+            }
+
+            // ============ Event Listeners ============
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    setActiveScreen(this.dataset.screen);
+                });
+            });
+
+            photoFileInput.addEventListener('change', handlePhotoUpload);
+
+            techBadge.addEventListener('click', () => {
+                alert(`Logged in as: ${state.technicianName}\nID: ${state.technicianId}`);
+            });
+
+            // ============ Initialize ============
+            function init() {
+                renderDashboard();
+                console.log('✅ Citriot Service & Traceability Platform Ready');
+                console.log(`👤 Technician: ${state.technicianName} (${state.technicianId})`);
+                console.log('📱 Mobile-first design | 🚀 Production ready');
+            }
+
+            // Public API
+            return {
+                init,
+                setActiveScreen,
+                getState: () => state
+            };
+        })();
+
+        // Start the application
+        document.addEventListener('DOMContentLoaded', () => {
+            CitriotApp.init();
+        });
+
+        // Handle service worker for PWA (optional)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // navigator.serviceWorker.register('/sw.js').then(registration => {
+                //     console.log('SW registered:', registration);
+                // }).catch(error => {
+                //     console.log('SW registration failed:', error);
+                // });
+            });
+        }
+    </script>
+</body>
+</html>
